@@ -16,12 +16,11 @@ const transporter = nodemailer.createTransport({
     },
   });
 
-export async function sendMail(admin: Admin, token: string) {
+export async function sendMail(admin: Admin, token: string, url: string) {
     try {
         const user = { name: admin.name, email: admin.email };
 
-        const html = generateHtml(user, token);
-        console.log(html);
+        const html = generateHtml(user, token, url);
 
         const mailOption = {
             from: "Ace & Grit LP",

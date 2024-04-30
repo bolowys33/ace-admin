@@ -3,7 +3,7 @@ interface User {
     email: string;
 }
 
-export function generateHtml(user: User, token: string): string {
+export function generateHtml(user: User, token: string, url: string): string {
      return `
     <html lang="en">
       <head>
@@ -79,7 +79,7 @@ export function generateHtml(user: User, token: string): string {
             </p>
             <p>
               Else, click here to continue.
-              <a href="https://blackholemain.onrender.com/api/users/reset_password/?email=${user.email}&token=${token}">
+              <a href="${url}/reset-password/?email=${user.email}&token=${token}">
                 Click here
               </a>
             </p>
