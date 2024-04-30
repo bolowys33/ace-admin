@@ -6,6 +6,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request): Promise<Response> {
     try {
+        const url = new URL(req.url);
+        const hostname =
+            url.hostname === "localhost"
+                ? `localhost:${url.port}`
+                : url.hostname;
+        const protocol = url.protocol;
+
+        const fullUrl = `${protocol}//${hostname}`
+
         await connectDB();
 
         const formData = await req.formData();
@@ -28,14 +37,14 @@ export async function POST(req: Request): Promise<Response> {
             );
         }
 
-        const adminToken = await Token.findOne({email})
+        const adminToken = await Token.findOne({ email });
         if (adminToken) {
-            adminToken.token = generateToken()
-            adminToken.expires = Date.now() + 300000
+            adminToken.token = generateToken();
+            adminToken.expires = Date.now() + 300000;
 
-            await adminToken.save()
+            await adminToken.save();
 
-            await sendMail({name: admin.firstname, email }, adminToken.token)
+            await sendMail({name: admin.firstname, email }, adminToken.token, fullUrl)
 
             return NextResponse.json(
                 {
@@ -49,12 +58,12 @@ export async function POST(req: Request): Promise<Response> {
         const recoverToken = new Token({
             token: generateToken(),
             admin_id: admin._id,
-            email
+            email,
         });
 
         await recoverToken.save();
 
-        await sendMail({name: admin.firstname, email }, recoverToken.token)
+        await sendMail({ name: admin.firstname, email }, recoverToken.token, fullUrl);
 
         return NextResponse.json(
             {
