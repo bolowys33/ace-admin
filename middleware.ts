@@ -5,7 +5,7 @@ import { JWSInvalid, JWTClaimValidationFailed, JWTExpired } from "jose/errors";
 
 export async function middleware(request: NextRequest) {
     if (
-        (request.nextUrl.pathname === "/api/attorney" &&
+        (request.nextUrl.pathname === "/api/attorneys" &&
             request.method === "GET") ||
         (request.nextUrl.pathname === "/api/posts" &&
             request.method === "GET") ||
@@ -64,8 +64,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        "/api/attorney",
-        "/api/attorney/:path*",
+        "/api/attorneys",
+        "/api/attorneys/:path*",
         "/api/admin",
         "/api/posts",
         "/api/posts/:path*",
