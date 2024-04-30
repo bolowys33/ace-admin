@@ -79,7 +79,7 @@ export function generateHtml(user: User, token: string, url: string): string {
             </p>
             <p>
               Else, click here to continue.
-              <a href="${url}/reset-password/?email=${user.email}&token=${token}">
+              <a href="${url}/reset-password/${token}">
                 Click here
               </a>
             </p>
