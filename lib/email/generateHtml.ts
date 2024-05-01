@@ -75,7 +75,7 @@ export function generateHtml(user: User, token: string, url: string): string {
             <h1 class="email-heading section-body">Password Change Request!</h1>
             <p class="email-message">Hello ${user.name},</p>
             <p class="email-message">
-              We noticed you requested to change your password. If it's not you, please ignore.
+              We noticed you requested to change your password. If you didn't, please ignore.
             </p>
             <p>
               Else, click here to continue.
