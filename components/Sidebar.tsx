@@ -17,17 +17,6 @@ import SidebarHeader from "./SidebarHeader";
 const Sidebar = () => {
     const pathname = usePathname()
 
-
-    const [openCategories, setOpenCategories] = useState<number[]>([]);
-
-    const toggleCategory = (index: number) => {
-        setOpenCategories((prevState) =>
-            prevState.includes(index)
-                ? prevState.filter((i) => i !== index)
-                : [...prevState, index]
-        );
-    };
-
     return (
         <div>
             {/* <SidebarHeader username="John Doe" role="administrator" /> */}
@@ -39,17 +28,12 @@ const Sidebar = () => {
                 </div>
                 <ul className="">
                     {MENU_LINKS.map((category, index) => (
-                        <li key={index} className="cursor-pointer pl-4 mt-3">
-                            <div onClick={() => toggleCategory(index)}>
+                        <li key={index} className="cursor-pointer pl-4 mt-3 text-[#b7bac1]">
+                            <div>
                                 {category.icon} {category.title}
-                                {openCategories.includes(index) ? (
-                                    <ExpandLess fontSize="small" />
-                                ) : (
-                                    <ExpandMore fontSize="small" />
-                                )}
                             </div>
-                            {openCategories.includes(index) && (
-                                <ul className="">
+                            
+                                <ul className="text-white">
                                     {category.links.map((link, linkIndex) => (
                                         <li key={`${index}-${linkIndex}`} className={`ml-5 my-1 p-[10px] rounded-md ${pathname === link.path ? "bg-[#2e374a]" : ""}`}>
                                             <Link href={link.path}>
@@ -58,11 +42,11 @@ const Sidebar = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            )}
+                        
                         </li>
                     ))}
                 </ul>
-                <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
+                <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/login' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
                         <LoginRounded /> Sign-in
                     </Link>
