@@ -49,7 +49,7 @@ const Sidebar = () => {
                             {openCategories.includes(index) && (
                                 <ul className="">
                                     {category.links.map((link, linkIndex) => (
-                                        <li key={`${index}-${linkIndex}`} className={`ml-5 my-2 p-[10px] rounded-md ${pathname === link.path ? "bg-[#2e374a]" : ""}`}>
+                                        <li key={`${index}-${linkIndex}`} className={`ml-5 my-1 p-[10px] rounded-md ${pathname === link.path ? "bg-[#2e374a]" : ""}`}>
                                             <Link href={link.path}>
                                                 {link.icon} {link.title}
                                             </Link>
