@@ -1,7 +1,13 @@
+'@layout null'
+
+import React from 'react';
+
 const Login = () => {
-    return ( <div>
-        Login
-    </div> );
+  return (
+    <div>
+      Login page
+    </div>
+  );
 }
- 
+
 export default Login;
