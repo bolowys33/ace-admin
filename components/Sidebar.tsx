@@ -44,7 +44,7 @@ const Sidebar = () => {
                     {MENU_LINKS.map((category, index) => (
                         <li key={index} className="cursor-pointer p-4">
                             <div onClick={() => toggleCategory(index)}>
-                                {category.icon} {category.title}{" "}
+                                {category.icon} {category.title}
                                 {openCategories.includes(index) ? (
                                     <ExpandLess fontSize="small" />
                                 ) : (
