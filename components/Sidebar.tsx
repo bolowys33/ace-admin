@@ -31,7 +31,7 @@ const Sidebar = () => {
     return (
         <div>
             {/* <SidebarHeader username="John Doe" role="administrator" /> */}
-            <div className="mt-5 space-y-4 pr-8">
+            <div className="mt-3 space-y-4 pr-8">
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
                         <SpaceDashboardRounded /> Dashboard
