@@ -8,7 +8,7 @@ import {
     ExpandLess,
 } from "@mui/icons-material";
 import Link from "next/link";
-import Image from "next/image";
+
 
 const Sidebar = () => {
     const [openCategories, setOpenCategories] = useState<number[]>([]);
