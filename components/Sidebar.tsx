@@ -6,6 +6,8 @@ import {
     SpaceDashboardRounded,
     ExpandMore,
     ExpandLess,
+    LogoutRounded,
+    LoginRounded,
 } from "@mui/icons-material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,7 +30,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <SidebarHeader username="John Doe" role="administrator" />
+            {/* <SidebarHeader username="John Doe" role="administrator" /> */}
             <div className="mt-5 space-y-4 pr-8">
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
@@ -62,12 +64,12 @@ const Sidebar = () => {
                 </ul>
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
-                        <SpaceDashboardRounded /> Dashboard
+                        <LoginRounded /> Sign-in
                     </Link>
                 </div>
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
-                        <SpaceDashboardRounded /> Dashboard
+                        <LogoutRounded /> Sign-out
                     </Link>
                 </div>
             </div>
