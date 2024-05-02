@@ -20,7 +20,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <div className="flex">
-                    <div className="w-1/5 h-screen bg-[#182237] pl-5 py-3">
+                    <div className="w-1/5 h-screen bg-[#182237] pl-5 py-3 sticky top-0">
                         <Sidebar />
                     </div>
                     <div className="w-4/5 p-5">
