@@ -28,7 +28,7 @@ const Sidebar = () => {
                 </div>
                 <ul className="">
                     {MENU_LINKS.map((category, index) => (
-                        <li key={index} className="cursor-pointer pl-4 mt-3 text-[#b7bac1]">
+                        <li key={index} className="pl-4 mt-3 text-[#b7bac1]">
                             <div>
                                 {category.icon} {category.title}
                             </div>
@@ -47,7 +47,7 @@ const Sidebar = () => {
                     ))}
                 </ul>
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/login' ? "bg-[#2e374a]" : ""}`}>
-                    <Link href={"/"}>
+                    <Link href={"/login"}>
                         <LoginRounded /> Sign-in
                     </Link>
                 </div>
