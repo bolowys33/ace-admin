@@ -8,6 +8,7 @@ import {
     ExpandLess,
 } from "@mui/icons-material";
 import Link from "next/link";
+import Image from "next/image";
 
 const Sidebar = () => {
     const [openCategories, setOpenCategories] = useState<number[]>([]);
@@ -22,6 +23,13 @@ const Sidebar = () => {
 
     return (
         <div>
+            <div className="flex items-center space-x-5">
+                <div className="flex justify-center items-center rounded-full h-12 w-12 bg-white text-[#151c2c] font-bold text-4xl">B</div>
+                <div className="flex flex-col">
+                    <span className="font-bold">John Doe</span>
+                    <span className="text-xs text-[#b7bac1]">administartor</span>
+                </div>
+            </div>
             <Link href={"/"}>
                 <SpaceDashboardRounded /> Dashboard
             </Link>
