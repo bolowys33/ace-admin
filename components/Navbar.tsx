@@ -8,7 +8,7 @@ const Navbar = () => {
     const pathname = usePathname();
 
     return (
-        <div className="flex items-center justify-between rounded-md p-5 bg-[#182237]">
+        <div className="flex items-center justify-between w-4/5 fixed p-5 bg-[#182237]">
             <div className="uppercase">{pathname === "/" ? "Dashboard" : pathname}</div>
             <div className="flex items-center bg-[#2e374a] gap-2 rounded-lg p-2 ">
                 <SearchRounded />

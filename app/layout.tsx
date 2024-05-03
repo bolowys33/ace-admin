@@ -23,9 +23,11 @@ export default function RootLayout({
                     <div className="w-1/5 h-screen bg-[#182237] pl-5 py-3 sticky top-0">
                         <Sidebar />
                     </div>
-                    <div className="w-4/5 p-5">
+                    <div className="w-4/5">
                         <Navbar />
+                        <div className="mt-[98px] px-3">
                         {children}
+                        </div>
                     </div>
                 </div>
             </body>
