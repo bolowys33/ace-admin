@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
 
 const Dashboard = () => {
@@ -9,6 +10,7 @@ const Dashboard = () => {
                 <Card title="Total Post Impressions" count={500} />
                 <Card title="Monthly Impressions" count={500} details="50% compare to last month" />
             </div>
+            <ImpressionChart />
             <RecentComments />
         </div>
     );
