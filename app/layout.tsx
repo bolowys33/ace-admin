@@ -20,10 +20,10 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <div className="flex">
-                    <div className="w-1/5 h-screen bg-[#182237] pl-5 py-3 sticky top-0">
+                    <div className="hidden md:block w-1/5 h-screen bg-[#182237] pl-5 py-3 sticky top-0">
                         <Sidebar />
                     </div>
-                    <div className="w-4/5">
+                    <div className="md:w-4/5">
                         <Navbar />
                         <div className="mt-[98px] px-3">
                         {children}
