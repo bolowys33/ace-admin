@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <div className="flex items-center justify-between w-4/5 fixed p-5 bg-[#182237]">
-            <div className="uppercase">{pathname === "/" ? "Dashboard" : pathname}</div>
+            <div className="uppercase text-[#b7bac1]">{pathname === "/" ? "Dashboard" : pathname}</div>
             <div className="flex items-center bg-[#2e374a] gap-2 rounded-lg p-2 ">
                 <SearchRounded />
                 <input type="text" title="search" placeholder="Search" className="bg-transparent border-none outline-none pl-2" />
