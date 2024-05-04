@@ -50,8 +50,9 @@ const data = [
 
 const ImpressionChart = () => {
     return (
-        <div>
-            <ResponsiveContainer width="100%" height="90%">
+        <div className="h-[450px] rounded-lg bg-[#182237] my-3 p-5">
+            <h2 className="text-[#b7bac1] mb-3">Weekly Recap</h2>
+            <ResponsiveContainer width="100%" height="90%" className={"text-white"}>
                 <LineChart
                     width={500}
                     height={300}
