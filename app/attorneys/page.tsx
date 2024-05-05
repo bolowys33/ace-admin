@@ -1,6 +1,8 @@
+import Search from "@/components/Search";
+
 const Attorneys = () => {
     return ( <div>
-        Attorneys
+        <Search placeholder="Search for an attorney"/>
     </div> );
 }
  
