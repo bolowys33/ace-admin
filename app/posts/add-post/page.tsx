@@ -2,6 +2,7 @@
 
 import InputField from "@/components/InputField";
 import { Box, Container, TextField } from "@mui/material";
+import JoditEditor from "jodit-react";
 import { useState } from "react";
 
 const AddPost = () => {
@@ -26,17 +27,25 @@ const AddPost = () => {
                             <label htmlFor="content" className="text-left p-2">
                                 Post content *
                             </label>
-                            <textarea
+                            {/* <textarea
                                 name="content"
                                 id="content"
                                 cols={30}
                                 rows={10}
                                 required
                                 className="w-full bg-[#2e374a] rounded-lg p-2 outline-none"
+                            /> */}
+                            <JoditEditor
+                                value={content}
+                                onChange={(newContent) =>
+                                    setContent(newContent)
+                                }
+                                className="w-full bg-[#2e374a] rounded-lg text-black outline-none"
                             />
                         </div>
                         <button type="submit">Add post</button>
                     </form>
+                    <p>{content}</p>
                 </Box>
             </Container>
         </div>
