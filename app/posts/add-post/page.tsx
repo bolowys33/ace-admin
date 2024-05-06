@@ -4,6 +4,8 @@ import InputField from "@/components/InputField";
 import { Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
+// import 'jodit-react/build/jodit.min.css';
+import './jodit-custom.css'; // Import your custom CSS file
 
 const AddPost = () => {
     const [title, setTitle] = useState("");
@@ -11,11 +13,14 @@ const AddPost = () => {
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    
+
     const editor = useRef(null);
     const config = {
-        // theme: "#2e374a",
+        // theme: "jodit-custom",
         height: "350px",
-        backgroundColor: "#2e374a"
+        backgroundColor: "black",
+        buttons: 'bold,strikethrough,underline,italic,|,ol,ul',
     }
 
     return (
@@ -34,14 +39,6 @@ const AddPost = () => {
                             <label htmlFor="content" className="text-left p-2">
                                 Post content *
                             </label>
-                            {/* <textarea
-                                name="content"
-                                id="content"
-                                cols={30}
-                                rows={10}
-                                required
-                                className="w-full bg-[#2e374a] rounded-lg p-2 outline-none"
-                            /> */}
                             <JoditEditor
                                 ref={editor}
                                 config={config}
