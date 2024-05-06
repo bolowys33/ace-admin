@@ -25,7 +25,7 @@ const AddPost = () => {
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="md" className="border ">
                 <Box>
-                    <h2 className="text-center">Create a blog post</h2>
+                    <h2 className="text-center font-bold text-lg">Create a blog post</h2>
                     <form className="flex flex-col items-center md:w-[95%] mx-auto">
                         <InputField
                             label="Post title *"

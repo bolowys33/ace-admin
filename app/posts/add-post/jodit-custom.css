@@ -1,7 +1,11 @@
 .jodit-react-container .jodit-workplace {
     background-color: #2e374a !important;
     color: white;
-    
+
+    .jodit-wysiwyg {
+        padding-left: 10px;
+    }
+
     ul {
         list-style: inside;
     }
