@@ -17,10 +17,8 @@ const AddPost = () => {
 
     const editor = useRef(null);
     const config = {
-        // theme: "jodit-custom",
         height: "350px",
         backgroundColor: "black",
-        buttons: 'bold,strikethrough,underline,italic,|,ol,ul',
     }
 
     return (
