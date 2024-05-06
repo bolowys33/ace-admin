@@ -4,14 +4,16 @@ import InputField from "@/components/InputField";
 import { Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
-// import 'jodit-react/build/jodit.min.css';
 import './jodit-custom.css'; // Import your custom CSS file
+import DOMPurify from 'dompurify';
 
 const AddPost = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    const cleanContent = DOMPurify.sanitize(content)
 
     
 
