@@ -7,7 +7,7 @@ const Attorneys = () => {
             <div className="flex items-center justify-between">
                 <Search placeholder="Search for an attorney" />
                 <Link
-                    href="/add-attorney"
+                    href="/attorneys/add-attorney"
                     className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
                     Add new
                 </Link>

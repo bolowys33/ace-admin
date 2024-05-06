@@ -4,12 +4,12 @@ import { Box, Container } from "@mui/material";
 const AddAtorney = () => {
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="md" className="">
+            <Container maxWidth="sm" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
                         Create Attorney details
                     </h2>
-                    <form className="flex flex-col items-center md:w-[95%] my-6 mx-auto">
+                    <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             label="First Name *"
                             placeholder="Enter Firstname"
