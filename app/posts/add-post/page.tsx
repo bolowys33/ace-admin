@@ -1,9 +1,9 @@
 "use client";
 
 import InputField from "@/components/InputField";
-import { Box, Container, TextField } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const AddPost = () => {
     const [title, setTitle] = useState("");
@@ -11,9 +11,16 @@ const AddPost = () => {
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    const editor = useRef(null);
+    const config = {
+        // theme: "#2e374a",
+        height: "350px",
+        backgroundColor: "#2e374a"
+    }
+
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="sm" className="border ">
+            <Container maxWidth="md" className="border ">
                 <Box>
                     <h2 className="text-center">Create a blog post</h2>
                     <form className="flex flex-col items-center md:w-[95%] mx-auto">
@@ -36,8 +43,10 @@ const AddPost = () => {
                                 className="w-full bg-[#2e374a] rounded-lg p-2 outline-none"
                             /> */}
                             <JoditEditor
+                                ref={editor}
+                                config={config}
                                 value={content}
-                                onChange={(newContent) =>
+                                onBlur={(newContent) =>
                                     setContent(newContent)
                                 }
                                 className="w-full bg-[#2e374a] rounded-lg text-black outline-none"
