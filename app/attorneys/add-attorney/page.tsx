@@ -1,8 +1,15 @@
+"use client"
+
 import InputField from "@/components/InputField";
-import { Box, Container } from "@mui/material";
+import { Alert, Box, Container } from "@mui/material";
+import axios from "axios";
 import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(true);
+    const [isloading, setIsLoading] = useState(false);
+
     const [inputData, setInputData] = useState({
         firstname: "",
         lastname: "",
@@ -20,12 +27,50 @@ const AddAtorney = () => {
         }
     };
 
-    const formData = new FormData();
-    formData.append("name", `${inputData.firstname} ${inputData.lastname}`);
-    formData.append("position", inputData.position);
-    if (image) formData.append("image", image);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError("");
+        setSuccess(false);
 
-    
+        const formData = new FormData();
+        formData.append("name", `${inputData.firstname} ${inputData.lastname}`);
+        formData.append("position", inputData.position);
+        if (image) formData.append("image", image);
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await axios.post("/api/attorneys", formData, {
+                headers: {
+                    Authorization: token,
+                },
+            });
+
+            if (response.status === 201) {
+                setSuccess(true);
+                setInputData({
+                    firstname: "",
+                    lastname: "",
+                    position: "",
+                });
+                setImage(null);
+            } else {
+                setError(response.data.message);
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setError(
+                    error.response?.data.message ||
+                        "Error adding attorney, try again"
+                );
+            } else {
+                setError("An unknown error occurred");
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
@@ -34,6 +79,12 @@ const AddAtorney = () => {
                     <h2 className="text-center font-bold text-3xl">
                         Create Attorney details
                     </h2>
+                    {error && <Alert severity="error">{error}</Alert>}
+                    {success && (
+                        <Alert severity="success">
+                            Attorney added successfully!
+                        </Alert>
+                    )}
                     <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             type="text"
