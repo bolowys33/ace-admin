@@ -90,7 +90,9 @@ const AddPost = () => {
                             </Alert>
                         )}
                     </div>
-                    <form className="flex flex-col items-center md:w-[95%] my-6 mx-auto">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col items-center md:w-[95%] my-6 mx-auto">
                         <InputField
                             type="text"
                             label="Post title *"
