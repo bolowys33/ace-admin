@@ -1,6 +1,6 @@
 import InputField from "@/components/InputField";
 import { Box, Container } from "@mui/material";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
     const [inputData, setInputData] = useState({
@@ -8,7 +8,22 @@ const AddAtorney = () => {
         lastname: "",
         position: "",
     });
-    const [file, setFile] = useState(null);
+    const [image, setImage] = useState<File | null>(null);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setImage(e.target.files[0]);
+        }
+    };
+
+    const formData = new FormData();
+    formData.append("name", `${inputData.firstname} ${inputData.lastname}`);
+    formData.append("position", inputData.position);
+    if (image) formData.append("image", image);
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
