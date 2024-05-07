@@ -113,7 +113,7 @@ const AddAtorney = () => {
                             type="text"
                             label="Position held *"
                             placeholder="Enter position"
-                            name="positiom"
+                            name="position"
                             required
                             onChange={handleChange}
                         />

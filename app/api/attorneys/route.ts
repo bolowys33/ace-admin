@@ -53,6 +53,10 @@ export async function POST(req: Request): Promise<Response> {
         const position = formData.get("position");
         const image = formData.get("image") as File;
 
+        console.log(name);
+        console.log(position, "gsdydg");
+        
+
         if (!name || !position || !image) {
             return NextResponse.json(
                 {

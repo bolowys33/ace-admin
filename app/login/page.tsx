@@ -33,6 +33,7 @@ const Login = () => {
             const response = await axios.post("/api/login", formData);
 
             if (response.status === 200) {
+              localStorage.setItem("token", response.data.token)
                 setSuccess(true);
                 setInputData({
                     username: "",
@@ -72,7 +73,8 @@ const Login = () => {
                             </Alert>
                         )}
                     </div>
-                    <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
+                    <form
+                    onSubmit={handleSubmit} className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             type="text"
                             label="Username *"
