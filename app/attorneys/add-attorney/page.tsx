@@ -7,7 +7,7 @@ import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState(true);
+    const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
     const [inputData, setInputData] = useState({
@@ -55,6 +55,7 @@ const AddAtorney = () => {
                     position: "",
                 });
                 setImage(null);
+                setTimeout(() => setSuccess(false), 10000);
             } else {
                 setError(response.data.message);
             }
@@ -64,9 +65,11 @@ const AddAtorney = () => {
                     error.response?.data.message ||
                         "Error adding attorney, try again"
                 );
+                setTimeout(() => setError(""), 10000);
             } else {
                 setError("An unknown error occurred");
             }
+            setTimeout(() => setError(""), 10000);
         } finally {
             setIsLoading(false);
         }
@@ -76,15 +79,17 @@ const AddAtorney = () => {
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="sm" className="">
                 <Box>
-                    <h2 className="text-center font-bold text-3xl">
+                    <h2 className="text-center font-bold text-3xl mb-8">
                         Create Attorney details
                     </h2>
-                    {error && <Alert severity="error">{error}</Alert>}
+                    <div  className="text-center w-[300px] mx-auto">
+                    {error && <Alert severity="error" >{error}</Alert>}
                     {success && (
                         <Alert severity="success">
                             Attorney added successfully!
                         </Alert>
                     )}
+                    </div>
                     <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             type="text"
