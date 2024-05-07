@@ -3,9 +3,10 @@ interface InputProps {
     name: string;
     label: string;
     required: boolean;
+    type: string
 }
 
-const InputField = ({ placeholder, name, label, required }: InputProps) => {
+const InputField = ({ placeholder, name, label, required, type }: InputProps) => {
     return (
         <div className="text-start space-y-3 w-full">
             <label htmlFor={name} className="ml-3">
@@ -13,7 +14,7 @@ const InputField = ({ placeholder, name, label, required }: InputProps) => {
             </label>
             <div className=" bg-[#2e374a] rounded-lg p-2">
                 <input
-                    type="text"
+                    type={type}
                     name={name}
                     id={name}
                     placeholder={placeholder}
