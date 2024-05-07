@@ -27,7 +27,7 @@ const MENU_LINKS: MenuLinks[] = [
         links: [
             {
                 title: "Add Post",
-                path: "posts/add-new",
+                path: "/posts/add-post",
                 icon: React.createElement(PostAddRounded),
             },
             {
@@ -43,7 +43,7 @@ const MENU_LINKS: MenuLinks[] = [
         links: [
             {
                 title: "Add Attorney",
-                path: "attorneys/add-new",
+                path: "/attorneys/add-attorney",
                 icon: React.createElement(PersonAddRounded),
             },
             {
