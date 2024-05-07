@@ -37,7 +37,7 @@ export default async function uploadImage(
           throw new Error(`Error uploading image: ${cloudinaryError.message}`);
         } else {
           // Handle other types of errors
-          throw new Error(`Error uploading image: `);
+          throw new Error(`Error uploading image: Network error `);
         }
       }
 }
