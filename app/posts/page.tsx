@@ -1,7 +1,10 @@
 import Search from "@/components/Search";
+import usePosts from "@/hooks/usePosts";
 import Link from "next/link";
 
 const Posts = () => {
+    const { posts, isFetching, error } = usePosts();
+
     return (
         <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
             <div className="flex items-center justify-between">
@@ -25,7 +28,8 @@ const Posts = () => {
                     <tr>
                         <td className="p-2">
                             <div className="flex items-center gap-2">
-                                First Blog; Introduction to our blog, the first blog post created
+                                First Blog; Introduction to our blog, the first
+                                blog post created
                             </div>
                         </td>
                         <td className="p-2">20-12-2024</td>
@@ -47,6 +51,6 @@ const Posts = () => {
             </table>
         </div>
     );
-}
- 
+};
+
 export default Posts;
