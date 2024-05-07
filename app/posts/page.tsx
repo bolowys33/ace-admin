@@ -1,3 +1,5 @@
+"use client";
+
 import Search from "@/components/Search";
 import usePosts from "@/hooks/usePosts";
 import Link from "next/link";
@@ -25,28 +27,31 @@ const Posts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="p-2">
-                            <div className="flex items-center gap-2">
-                                First Blog; Introduction to our blog, the first
-                                blog post created
-                            </div>
-                        </td>
-                        <td className="p-2">20-12-2024</td>
-                        <td className="p-2">10 comments</td>
-                        <td className="p-2 space-x-2">
-                            <button
-                                type="button"
-                                className="py-1 px-2 rounded-md bg-[teal]">
-                                View
-                            </button>
-                            <button
-                                type="button"
-                                className="py-1 px-2 rounded-md bg-[crimson]">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                    {posts.map((post) => (
+                        <tr>
+                            <td className="p-2">
+                                <div className="flex items-center gap-2">
+                                    {post.title}
+                                </div>
+                            </td>
+                            <td className="p-2">{post.date_created}</td>
+                            <td className="p-2">10 comments</td>
+                            <td className="p-2 space-x-2">
+                                <Link href={`/posts/post/${post.post_url}`}>
+                                    <button
+                                        type="button"
+                                        className="py-1 px-2 rounded-md bg-[teal] hover:bg-[#103131]">
+                                        View
+                                    </button>
+                                </Link>
+                                <button
+                                    type="button"
+                                    className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#57202b]">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
