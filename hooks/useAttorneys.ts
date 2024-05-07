@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 interface Attorney {
     _id: string;
     name: string;
-    // Add other attorney properties here
+    position: string;
+    image_url: string;
+    image_id: string;
 }
 
 interface AttorneyResponse {
