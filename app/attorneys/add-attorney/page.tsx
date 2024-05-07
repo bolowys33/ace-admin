@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
@@ -82,15 +82,17 @@ const AddAtorney = () => {
                     <h2 className="text-center font-bold text-3xl mb-8">
                         Create Attorney details
                     </h2>
-                    <div  className="text-center w-[300px] mx-auto">
-                    {error && <Alert severity="error" >{error}</Alert>}
-                    {success && (
-                        <Alert severity="success">
-                            Attorney added successfully!
-                        </Alert>
-                    )}
+                    <div className="text-center w-[300px] mx-auto">
+                        {error && <Alert severity="error">{error}</Alert>}
+                        {success && (
+                            <Alert severity="success">
+                                Attorney added successfully!
+                            </Alert>
+                        )}
                     </div>
-                    <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             type="text"
                             label="First Name *"
@@ -125,7 +127,7 @@ const AddAtorney = () => {
                         <button
                             type="submit"
                             className="py-2 px-5 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
-                            Add attorney
+                            {isloading ? "Loading" : "Add attorney"}
                         </button>
                     </form>
                 </Box>
