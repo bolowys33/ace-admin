@@ -79,10 +79,10 @@ const AddAtorney = () => {
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="sm" className="">
                 <Box>
-                    <h2 className="text-center font-bold text-3xl mb-8">
+                    <h2 className="text-center font-bold text-3xl">
                         Create Attorney details
                     </h2>
-                    <div className="text-center w-max mx-auto">
+                    <div className="text-center w-max mx-auto mt-8">
                         {error && <Alert severity="error">{error}</Alert>}
                         {success && (
                             <Alert severity="success">
