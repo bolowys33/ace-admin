@@ -11,21 +11,30 @@ const AddAtorney = () => {
                     </h2>
                     <form className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
+                            type="text"
                             label="First Name *"
                             placeholder="Enter Firstname"
                             name="firstname"
                             required
                         />
                         <InputField
+                            type="text"
                             label="Last Name *"
                             placeholder="Enter Lastname"
                             name="lastname"
                             required
                         />
                         <InputField
+                            type="text"
                             label="Position held *"
                             placeholder="Enter position"
                             name="positiom"
+                            required
+                        />
+                        <InputField
+                            type="file"
+                            label="Attorney Image *"
+                            name="image"
                             required
                         />
                         <button

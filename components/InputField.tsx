@@ -1,5 +1,5 @@
 interface InputProps {
-    placeholder: string;
+    placeholder?: string;
     name: string;
     label: string;
     required: boolean;
