@@ -121,6 +121,7 @@ const AddPost = () => {
                         </div>
                         <button
                             type="submit"
+                            disabled={isloading}
                             className="py-2 px-5 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
                             {isloading ? "Creating" : "Add post"}
                         </button>
