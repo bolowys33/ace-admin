@@ -82,7 +82,7 @@ const AddAtorney = () => {
                     <h2 className="text-center font-bold text-3xl mb-8">
                         Create Attorney details
                     </h2>
-                    <div className="text-center w-[300px] mx-auto">
+                    <div className="text-center w-max mx-auto">
                         {error && <Alert severity="error">{error}</Alert>}
                         {success && (
                             <Alert severity="success">
