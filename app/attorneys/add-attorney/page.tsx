@@ -98,6 +98,7 @@ const AddAtorney = () => {
                             label="First Name *"
                             placeholder="Enter Firstname"
                             name="firstname"
+                            value={inputData.firstname}
                             required
                             onChange={handleChange}
                         />
@@ -106,6 +107,7 @@ const AddAtorney = () => {
                             label="Last Name *"
                             placeholder="Enter Lastname"
                             name="lastname"
+                            value={inputData.lastname}
                             required
                             onChange={handleChange}
                         />
@@ -115,6 +117,7 @@ const AddAtorney = () => {
                             placeholder="Enter position"
                             name="position"
                             required
+                            value={inputData.position}
                             onChange={handleChange}
                         />
                         <InputField

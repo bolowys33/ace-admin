@@ -3,13 +3,22 @@ import { ChangeEventHandler } from "react";
 interface InputProps {
     placeholder?: string;
     name: string;
+    value?: string;
     label: string;
     required: boolean;
     type: string;
-    onChange: ChangeEventHandler<HTMLInputElement>
+    onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-const InputField = ({ placeholder, name, label, required, type, onChange }: InputProps) => {
+const InputField = ({
+    placeholder,
+    name,
+    label,
+    required,
+    type,
+    value,
+    onChange,
+}: InputProps) => {
     return (
         <div className="text-start space-y-3 w-full">
             <label htmlFor={name} className="ml-3">
@@ -19,6 +28,7 @@ const InputField = ({ placeholder, name, label, required, type, onChange }: Inpu
                 <input
                     type={type}
                     name={name}
+                    value={value}
                     id={name}
                     placeholder={placeholder}
                     required={required}

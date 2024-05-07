@@ -80,6 +80,7 @@ const Login = () => {
                             label="Username *"
                             placeholder="Enter username"
                             name="username"
+                            value={inputData.username}
                             required
                             onChange={handleChange}
                         />
@@ -88,6 +89,7 @@ const Login = () => {
                             label="Password *"
                             placeholder="Enter password"
                             name="password"
+                            value={inputData.password}
                             required
                             onChange={handleChange}
                         />
