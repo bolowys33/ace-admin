@@ -1,7 +1,15 @@
 import InputField from "@/components/InputField";
 import { Box, Container } from "@mui/material";
+import { useState } from "react";
 
 const AddAtorney = () => {
+    const [inputData, setInputData] = useState({
+        firstname: "",
+        lastname: "",
+        position: "",
+    });
+    const [file, setFile] = useState(null);
+
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="sm" className="">
