@@ -26,7 +26,6 @@ const AddPost = () => {
     const editor = useRef(null);
     const config = {
         height: "350px",
-        backgroundColor: "black",
     };
 
     return (
@@ -54,7 +53,7 @@ const AddPost = () => {
                                 ref={editor}
                                 config={config}
                                 value={inputData.content}
-                                onChange={(newContent) =>
+                                onBlur={(newContent) =>
                                     setInputData({
                                         ...inputData,
                                         content: newContent,
