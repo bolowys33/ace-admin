@@ -25,6 +25,8 @@ const AddAtorney = () => {
     formData.append("position", inputData.position);
     if (image) formData.append("image", image);
 
+    
+
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="sm" className="">
