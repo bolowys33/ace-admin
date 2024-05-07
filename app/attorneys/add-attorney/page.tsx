@@ -39,6 +39,7 @@ const AddAtorney = () => {
                             placeholder="Enter Firstname"
                             name="firstname"
                             required
+                            onChange={handleChange}
                         />
                         <InputField
                             type="text"
@@ -46,6 +47,7 @@ const AddAtorney = () => {
                             placeholder="Enter Lastname"
                             name="lastname"
                             required
+                            onChange={handleChange}
                         />
                         <InputField
                             type="text"
@@ -53,12 +55,14 @@ const AddAtorney = () => {
                             placeholder="Enter position"
                             name="positiom"
                             required
+                            onChange={handleChange}
                         />
                         <InputField
                             type="file"
                             label="Attorney Image *"
                             name="image"
                             required
+                            onChange={handleFileChange}
                         />
                         <button
                             type="submit"
