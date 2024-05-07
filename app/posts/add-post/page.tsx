@@ -86,7 +86,7 @@ const AddPost = () => {
                         {error && <Alert severity="error">{error}</Alert>}
                         {success && (
                             <Alert severity="success">
-                                Attorney added successfully!
+                                Post created successfully!
                             </Alert>
                         )}
                     </div>
