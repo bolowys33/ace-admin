@@ -1,3 +1,5 @@
+"use client"
+
 import Search from "@/components/Search";
 import useAttorneys from "@/hooks/useAttorneys";
 import Link from "next/link";
@@ -26,16 +28,17 @@ const Attorneys = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {attorneys.map(attorney => (
+                        <tr key={attorney._id}>
                         <td className="p-2">
                             <div className="flex items-center gap-2">
                                 <div className="flex justify-center items-center rounded-full h-10 w-10 bg-white text-[#151c2c] font-bold text-4xl">
                                     J
                                 </div>
-                                Jide Bolodeoku
+                                {attorney.name}
                             </div>
                         </td>
-                        <td className="p-2">Founding Partner</td>
+                        <td className="p-2">{attorney.position}</td>
                         <td className="p-2">20-12-2024</td>
                         <td className="p-2 space-x-2">
                             <button
@@ -50,6 +53,7 @@ const Attorneys = () => {
                             </button>
                         </td>
                     </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
