@@ -7,6 +7,46 @@ import Link from "next/link";
 const Posts = () => {
     const { posts, isFetching, error } = usePosts();
 
+    if (isFetching) {
+        return (
+            <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
+                <div className="flex items-center justify-between">
+                    <div className="w-64 h-8 bg-gray-500 animate-pulse"></div>
+                    <div className="w-24 h-8 bg-gray-500 animate-pulse"></div>
+                </div>
+                <table className="w-full my-5">
+                    <thead>
+                        <tr>
+                            <td className="px-2 pb-3 h-8 bg-gray-500 animate-pulse"></td>
+                            <td className="px-2 pb-3 h-8 bg-gray-500 animate-pulse"></td>
+                            <td className="px-2 pb-3 h-8 bg-gray-500 animate-pulse"></td>
+                            <td className="px-2 pb-3 h-8 bg-gray-500 animate-pulse"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.from({ length: 5 }, (_, index) => (
+                            <tr key={index}>
+                                <td className="p-2">
+                                    <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                </td>
+                                <td className="p-2">
+                                    <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                </td>
+                                <td className="p-2">
+                                    <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                </td>
+                                <td className="p-2 space-x-2">
+                                    <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
+                                    <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
     return (
         <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
             <div className="flex items-center justify-between">
