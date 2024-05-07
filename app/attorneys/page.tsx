@@ -1,9 +1,10 @@
 import Search from "@/components/Search";
+import useAttorneys from "@/hooks/useAttorneys";
 import Link from "next/link";
 
 const Attorneys = () => {
 
-    
+    const { attorneys, isFetching, error, getAttorneys } = useAttorneys()
 
     return (
         <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">

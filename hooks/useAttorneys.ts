@@ -18,7 +18,7 @@ const useAttorneys = () => {
     const [isFetching, setIsFetching] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const getAttorneys = async () => {
+    const getAttorneys = async (): Promise<void> => {
         setIsFetching(true);
         setError(null);
 
