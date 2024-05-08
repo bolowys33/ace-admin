@@ -58,7 +58,7 @@ const SinglePost = ({ url }: { url: string }) => {
                             {post?.date_created} | 15 comments
                         </p>
                     </div>
-                    <div className=" w-15px">
+                    <div className="space-y-3 list-style">
                         {ReactHtmlParser(post?.content as string)}
                     </div>
                 </Container>
