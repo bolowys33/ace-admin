@@ -7,6 +7,66 @@ import Link from "next/link";
 const Attorneys = () => {
     const { attorneys, isFetching, error } = useAttorneys();
 
+    if (error) {
+        return (
+            <div className=" flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
+                <div className="flex items-center justify-between">
+                    <Search placeholder="Search for an attorney" />
+                    <Link
+                        href="/attorneys/add-attorney"
+                        className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
+                        Add new
+                    </Link>
+                </div>
+                <table className="w-full my-5">
+                    <thead>
+                        <tr>
+                            <td className="px-2 pb-3 w-2/5">Name</td>
+                            <td className="px-2 pb-3 w-[30%]">Role</td>
+                            <td className="px-2 pb-3 w-[10%]">Date added</td>
+                            <td className="px-2 pb-3 w-[20%]">Action</td>
+                        </tr>
+                    </thead>
+                </table>
+                <h3 className="place-self-center mt-[130px] text-xl">
+                    Error fetching attorneys, check your network and try again
+                </h3>
+            </div>
+        );
+    }
+
+    if (attorneys.length === 0) {
+        return (
+            <div className=" flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
+                <div className="flex items-center justify-between">
+                    <Search placeholder="Search for an attorney" />
+                    <Link
+                        href="/attorneys/add-attorney"
+                        className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
+                        Add new
+                    </Link>
+                </div>
+                <table className="w-full my-5">
+                    <thead>
+                        <tr>
+                            <td className="px-2 pb-3 w-2/5">Name</td>
+                            <td className="px-2 pb-3 w-[30%]">Role</td>
+                            <td className="px-2 pb-3 w-[10%]">Date added</td>
+                            <td className="px-2 pb-3 w-[20%]">Action</td>
+                        </tr>
+                    </thead>
+                </table>
+                <h3 className="place-self-center mt-[130px] text-xl">
+                    No attorney profile found, click{" "}
+                    <Link href="/attorneys/add-attorney" className="">
+                        here
+                    </Link>{" "}
+                    to add new attorney
+                </h3>
+            </div>
+        );
+    }
+
     return (
         <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
             <div className="flex items-center justify-between">
@@ -24,7 +84,9 @@ const Attorneys = () => {
                             <tr>
                                 <td className="px-2 pb-3 w-[40%]">Name</td>
                                 <td className="px-2 pb-3 w-[30%]">Role</td>
-                                <td className="px-2 pb-3 w-[10%]">Date added</td>
+                                <td className="px-2 pb-3 w-[10%]">
+                                    Date added
+                                </td>
                                 <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
@@ -56,7 +118,9 @@ const Attorneys = () => {
                             <tr>
                                 <td className="px-2 pb-3 w-2/5">Name</td>
                                 <td className="px-2 pb-3 w-[30%]">Role</td>
-                                <td className="px-2 pb-3 w-[10%]">Date added</td>
+                                <td className="px-2 pb-3 w-[10%]">
+                                    Date added
+                                </td>
                                 <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
