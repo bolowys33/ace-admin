@@ -3,7 +3,7 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "@/app/posts/add-post/jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
@@ -11,14 +11,21 @@ import useSinglePost from "@/hooks/useSinglePost";
 
 const UpdatePost = ({ params }: { params: { url: string } }) => {
     const { url } = params;
-    const { post, isFetching } = useSinglePost(url);
+    const { post, error, isFetching } = useSinglePost(url);
 
-    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
-    const [title, setTitle] = useState(post?.title || "");
-    const [content, setContent] = useState(post?.content || "");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+
+    useEffect(() => {
+        if (post) {
+            setTitle(post.title);
+            setContent(post.content);
+        }
+    }, [post]);
 
     const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
@@ -38,7 +45,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        setError("");
+        setErrorMessage("");
         setSuccess(false);
 
         const formData = new FormData();
@@ -61,30 +68,48 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
                 setContent("");
                 setTimeout(() => setSuccess(false), 10000);
             } else {
-                setError(response.data.message);
+                setErrorMessage(response.data.message);
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                setError(
+                setErrorMessage(
                     error.response?.data.message ||
                         "Error updating post, try again"
                 );
-                setTimeout(() => setError(""), 10000);
+                setTimeout(() => setErrorMessage(""), 10000);
             } else {
-                setError("An unknown error occurred");
+                setErrorMessage("An unknown error occurred");
             }
-            setTimeout(() => setError(""), 10000);
+            setTimeout(() => setErrorMessage(""), 10000);
         } finally {
             setIsLoading(false);
         }
     };
 
     if (isFetching) {
-        return <div>Loading...</div>;
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">Loading</h3>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">
+                    Error fetching post, check your network and try again
+                </h3>
+            </div>
+        );
     }
 
     if (!post) {
-        return <div>Post not found</div>;
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">Post not found</h3>
+            </div>
+        );
     }
 
     return (
@@ -92,10 +117,12 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
             <Container maxWidth="md" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
-                        Update a blog post {post.title}
+                        Update Blog Post
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
-                        {error && <Alert severity="error">{error}</Alert>}
+                        {errorMessage && (
+                            <Alert severity="error">{errorMessage}</Alert>
+                        )}
                         {success && (
                             <Alert severity="success">
                                 Post updated successfully!
