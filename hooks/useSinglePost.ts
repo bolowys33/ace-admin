@@ -15,9 +15,9 @@ interface PostResponse {
     message: string | null;
 }
 
-const usePosts = (url: string) => {
+const useSinglePost = (url: string) => {
     const [post, setPost] = useState<Post | null>(null);
-    const [isFetching, setIsFetching] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const getPost = async (): Promise<void> => {
@@ -51,4 +51,4 @@ const usePosts = (url: string) => {
     return { post, isFetching, error };
 };
 
-export default usePosts;
+export default useSinglePost;

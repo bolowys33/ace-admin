@@ -17,7 +17,7 @@ interface AttorneyResponse {
 
 const useAttorneys = () => {
     const [attorneys, setAttorneys] = useState<Attorney[]| null>(null);
-    const [isFetching, setIsFetching] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const getAttorneys = async (): Promise<void> => {

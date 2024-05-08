@@ -17,7 +17,7 @@ interface PostResponse {
 
 const usePosts = () => {
     const [posts, setPosts] = useState<Post[] | null>(null);
-    const [isFetching, setIsFetching] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const getPosts = async (): Promise<void> => {
