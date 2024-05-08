@@ -7,8 +7,12 @@ import { ChangeEvent, useRef, useState } from "react";
 import "./jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
+import useSinglePost from "@/hooks/useSinglePost";
 
-const AddPost = () => {
+const UpdatePost = ({ params }: { params: { url: string } }) => {
+    const { url } = params;
+    const { post, isFetching } = useSinglePost(url);
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -42,13 +46,14 @@ const AddPost = () => {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await axios.post("/api/posts", formData, {
+            const response = await axios.put("/api/posts/", formData, {
                 headers: {
                     Authorization: token,
                 },
             });
 
             if (response.status === 201) {
+                localStorage.setItem("token", response.data.token);
                 setSuccess(true);
                 setInputData({
                     title: "",
@@ -126,7 +131,7 @@ const AddPost = () => {
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
                             }`}>
-                            {isloading ? "Creating" : "Add post"}
+                            {isloading ? "Update..." : "Update post"}
                         </button>
                     </form>
                 </Box>
@@ -135,4 +140,4 @@ const AddPost = () => {
     );
 };
 
-export default AddPost;
+export default UpdatePost;
