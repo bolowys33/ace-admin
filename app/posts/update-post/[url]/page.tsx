@@ -4,7 +4,7 @@ import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
 import { ChangeEvent, useRef, useState } from "react";
-import "./jodit-custom.css"; // Import your custom CSS file
+import "@/app/posts/add-post/jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
 import useSinglePost from "@/hooks/useSinglePost";
@@ -18,8 +18,8 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
     const [isloading, setIsLoading] = useState(false);
 
     const [inputData, setInputData] = useState({
-        title: "",
-        content: "",
+        title: post?.title as string,
+        content: post?.content as string,
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

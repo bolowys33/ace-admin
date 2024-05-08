@@ -49,7 +49,7 @@ const SinglePost = ({ url }: { url: string }) => {
             ) : (
                 <div className="flex flex-col items-end">
                     <Link
-                        href="/posts/add-post"
+                        href={`/posts/update-post/${post?.post_url}`}
                         className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white rounded-md mb-4">
                         Update Post
                     </Link>
