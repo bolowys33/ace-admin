@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 
-const PostPage = ({ params }: { params: string }) => {
+const PostPage = ({ params }: { params: { url: string } }) => {
     const { url } = params;
 
     return (
