@@ -46,7 +46,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await axios.put("/api/posts/", formData, {
+            const response = await axios.put(`/api/posts/${url}`, formData, {
                 headers: {
                     Authorization: token,
                 },
@@ -67,7 +67,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
             if (axios.isAxiosError(error)) {
                 setError(
                     error.response?.data.message ||
-                        "Error creating post, try again"
+                        "Error updating post, try again"
                 );
                 setTimeout(() => setError(""), 10000);
             } else {
