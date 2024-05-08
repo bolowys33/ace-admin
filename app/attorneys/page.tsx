@@ -17,44 +17,80 @@ const Attorneys = () => {
                     Add new
                 </Link>
             </div>
-            <table className="w-full my-5">
-                <thead>
-                    <tr>
-                        <td className="px-2 pb-3">Name</td>
-                        <td className="px-2 pb-3">Role</td>
-                        <td className="px-2 pb-3">Date added</td>
-                        <td className="px-2 pb-3">Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {attorneys.map((attorney) => (
-                        <tr key={attorney._id}>
-                            <td className="p-2">
-                                <div className="flex items-center gap-2">
-                                    <div className="flex justify-center items-center rounded-full h-10 w-10 bg-white text-[#151c2c] font-bold text-4xl">
-                                        J
-                                    </div>
-                                    {attorney.name}
-                                </div>
-                            </td>
-                            <td className="p-2">{attorney.position}</td>
-                            <td className="p-2">20-12-2024</td>
-                            <td className="p-2 space-x-2">
-                                <button
-                                    type="button"
-                                    className="py-1 px-2 rounded-md bg-[teal]">
-                                    Edit
-                                </button>
-                                <button
-                                    type="button"
-                                    className="py-1 px-2 rounded-md bg-[crimson]">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {isFetching ? (
+                <div>
+                    <table className="w-full my-5">
+                        <thead>
+                            <tr>
+                                <td className="px-2 pb-3">Name</td>
+                                <td className="px-2 pb-3">Role</td>
+                                <td className="px-2 pb-3">Date added</td>
+                                <td className="px-2 pb-3">Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Array.from({ length: 5 }, (_, index) => (
+                                <tr key={index}>
+                                    <td className="p-2">
+                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                    </td>
+                                    <td className="p-2">
+                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                    </td>
+                                    <td className="p-2">
+                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                    </td>
+                                    <td className="flex p-2 space-x-2">
+                                        <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div>
+                    <table className="w-full my-5">
+                        <thead>
+                            <tr>
+                                <td className="px-2 pb-3">Name</td>
+                                <td className="px-2 pb-3">Role</td>
+                                <td className="px-2 pb-3">Date added</td>
+                                <td className="px-2 pb-3">Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {attorneys.map((attorney) => (
+                                <tr key={attorney._id}>
+                                    <td className="p-2">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex justify-center items-center rounded-full h-10 w-10 bg-white text-[#151c2c] font-bold text-4xl">
+                                                J
+                                            </div>
+                                            {attorney.name}
+                                        </div>
+                                    </td>
+                                    <td className="p-2">{attorney.position}</td>
+                                    <td className="p-2">20-12-2024</td>
+                                    <td className="p-2 space-x-2">
+                                        <button
+                                            type="button"
+                                            className="py-1 px-2 rounded-md bg-[teal]">
+                                            Edit
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="py-1 px-2 rounded-md bg-[crimson]">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };
