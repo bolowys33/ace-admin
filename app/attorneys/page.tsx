@@ -22,10 +22,10 @@ const Attorneys = () => {
                     <table className="w-full my-5">
                         <thead>
                             <tr>
-                                <td className="px-2 pb-3">Name</td>
-                                <td className="px-2 pb-3">Role</td>
-                                <td className="px-2 pb-3">Date added</td>
-                                <td className="px-2 pb-3">Action</td>
+                                <td className="px-2 pb-3 w-[40%]">Name</td>
+                                <td className="px-2 pb-3 w-[30%]">Role</td>
+                                <td className="px-2 pb-3 w-[10%]">Date added</td>
+                                <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,10 +54,10 @@ const Attorneys = () => {
                     <table className="w-full my-5">
                         <thead>
                             <tr>
-                                <td className="px-2 pb-3">Name</td>
-                                <td className="px-2 pb-3">Role</td>
-                                <td className="px-2 pb-3">Date added</td>
-                                <td className="px-2 pb-3">Action</td>
+                                <td className="px-2 pb-3 w-2/5">Name</td>
+                                <td className="px-2 pb-3 w-[30%]">Role</td>
+                                <td className="px-2 pb-3 w-[10%]">Date added</td>
+                                <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
                         <tbody>
