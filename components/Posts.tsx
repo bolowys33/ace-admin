@@ -19,9 +19,9 @@ const Posts = () => {
                 <table className="w-full my-5">
                     <thead>
                         <tr>
-                            <td className="px-2 pb-3 w-2/5">Title</td>
-                            <td className="px-2 pb-3 w-[10%]">Date added</td>
-                            <td className="px-2 pb-3 w-[30%]">Comments</td>
+                            <td className="px-2 pb-3 w-[50%]">Title</td>
+                            <td className="px-2 pb-3 w-[15%]">Date added</td>
+                            <td className="px-2 pb-3 w-[15%]">Comments</td>
                             <td className="px-2 pb-3 w-[20%]">Action</td>
                         </tr>
                     </thead>
@@ -48,11 +48,11 @@ const Posts = () => {
                     <table className="w-full my-5">
                         <thead>
                             <tr>
-                                <td className="px-2 pb-3 w-2/5">Title</td>
-                                <td className="px-2 pb-3 w-[10%]">
+                                <td className="px-2 pb-3 w-[50%]">Title</td>
+                                <td className="px-2 pb-3 w-[15%]">
                                     Date added
                                 </td>
-                                <td className="px-2 pb-3 w-[30%]">Comments</td>
+                                <td className="px-2 pb-3 w-[15%]">Comments</td>
                                 <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
@@ -106,11 +106,11 @@ const Posts = () => {
                     <table className="w-full my-5">
                         <thead>
                             <tr>
-                                <td className="px-2 pb-3 w-2/5">Title</td>
-                                <td className="px-2 pb-3 w-[10%]">
+                                <td className="px-2 pb-3 w-[50%]">Title</td>
+                                <td className="px-2 pb-3 w-[15%]">
                                     Date added
                                 </td>
-                                <td className="px-2 pb-3 w-[30%]">Comments</td>
+                                <td className="px-2 pb-3 w-[15%]">Comments</td>
                                 <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
@@ -122,7 +122,9 @@ const Posts = () => {
                                             {post.title}
                                         </div>
                                     </td>
-                                    <td className="p-2">{post.date_created}</td>
+                                    <td className="p-2">
+                                        {post.date_created.split("T")[0]}
+                                    </td>
                                     <td className="p-2">10 comments</td>
                                     <td className="p-2 space-x-2">
                                         <Link
