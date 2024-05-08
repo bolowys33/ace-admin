@@ -16,7 +16,7 @@ interface AttorneyResponse {
 }
 
 const useAttorneys = () => {
-    const [attorneys, setAttorneys] = useState<Attorney[]>([]);
+    const [attorneys, setAttorneys] = useState<Attorney[]| null>(null);
     const [isFetching, setIsFetching] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
