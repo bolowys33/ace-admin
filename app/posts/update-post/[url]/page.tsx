@@ -17,16 +17,18 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
-    const [inputData, setInputData] = useState({
-        title: post?.title as string,
-        content: post?.content as string,
-    });
+    const [title, setTitle] = useState(post?.title || "");
+    const [content, setContent] = useState(post?.content || "");
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
     };
 
-    const cleanContent = DOMPurify.sanitize(inputData.content);
+    const handleContentChange = (newContent: string) => {
+        setContent(newContent);
+    };
+
+    const cleanContent = DOMPurify.sanitize(content);
 
     const editor = useRef(null);
     const config = {
@@ -40,7 +42,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
         setSuccess(false);
 
         const formData = new FormData();
-        formData.append("title", inputData.title);
+        formData.append("title", title);
         formData.append("content", cleanContent);
 
         try {
@@ -55,10 +57,8 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
             if (response.status === 201) {
                 localStorage.setItem("token", response.data.token);
                 setSuccess(true);
-                setInputData({
-                    title: "",
-                    content: "",
-                });
+                setTitle("");
+                setContent("");
                 setTimeout(() => setSuccess(false), 10000);
             } else {
                 setError(response.data.message);
@@ -79,18 +79,26 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
         }
     };
 
+    if (isFetching) {
+        return <div>Loading...</div>;
+    }
+
+    if (!post) {
+        return <div>Post not found</div>;
+    }
+
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="md" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
-                        Create a blog post
+                        Update a blog post {post.title}
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
                         {error && <Alert severity="error">{error}</Alert>}
                         {success && (
                             <Alert severity="success">
-                                Post created successfully!
+                                Post updated successfully!
                             </Alert>
                         )}
                     </div>
@@ -102,9 +110,9 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
                             label="Post title *"
                             placeholder="Enter post title"
                             name="title"
-                            value={inputData.title}
+                            value={title}
                             required
-                            onChange={handleChange}
+                            onChange={handleTitleChange}
                         />
                         <div className="w-full space-y-3 my-4">
                             <label htmlFor="content" className="text-left p-2">
@@ -113,13 +121,8 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
                             <JoditEditor
                                 ref={editor}
                                 config={config}
-                                value={inputData.content}
-                                onBlur={(newContent) =>
-                                    setInputData({
-                                        ...inputData,
-                                        content: newContent,
-                                    })
-                                }
+                                value={content}
+                                onBlur={handleContentChange}
                                 className="w-full bg-[#2e374a] rounded-lg text-black outline-none"
                             />
                         </div>
@@ -131,7 +134,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
                             }`}>
-                            {isloading ? "Update..." : "Update post"}
+                            {isloading ? "Updating..." : "Update post"}
                         </button>
                     </form>
                 </Box>
