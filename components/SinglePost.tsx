@@ -47,7 +47,13 @@ const SinglePost = ({ url }: { url: string }) => {
                     </h3>
                 </div>
             ) : (
-                <Container
+                <div className="flex flex-col items-end">
+                    <Link
+                        href="/posts/add-post"
+                        className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white rounded-md mb-4">
+                        Update Post
+                    </Link>
+                    <Container
                     maxWidth="md"
                     className="space-y-4 font-poppins text-justify font-medium">
                     <div className="text-center my-5 space-y-2">
@@ -61,7 +67,9 @@ const SinglePost = ({ url }: { url: string }) => {
                     <div className="space-y-3 list-style">
                         {ReactHtmlParser(post?.content as string)}
                     </div>
+                    
                 </Container>
+                </div>
             )}
         </div>
     );
