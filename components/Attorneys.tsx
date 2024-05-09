@@ -129,7 +129,7 @@ const Attorneys = () => {
                                     <td className="p-2">20-12-2024</td>
                                     <td className="p-2 space-x-2">
                                     <Link
-                                            href={`/attorneys/attorney/${attorney._id}`}>
+                                            href={`/attorneys/edit-attorney/${attorney._id}`}>
                                             <button
                                                 type="button"
                                                 className="py-1 px-2 rounded-md bg-[teal] hover:bg-[#103131]">
