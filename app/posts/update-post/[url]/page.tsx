@@ -89,7 +89,7 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
     if (isFetching) {
         return (
             <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
-                <h3 className="place-self-center text-xl">Loading</h3>
+                <h3 className="place-self-center text-xl">Loading...</h3>
             </div>
         );
     }
