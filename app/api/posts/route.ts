@@ -6,7 +6,7 @@ export async function GET(): Promise<Response> {
     try {
         await connectDB();
 
-        const posts = await Post.find({}).select("-__v");
+        const posts = await Post.find({}).select("-__v").limit();
         if (posts.length === 0) {
             return NextResponse.json(
                 { success: false, message: "No post found" },
@@ -37,7 +37,7 @@ export async function POST(req: Request): Promise<Response> {
     try {
         await connectDB();
 
-        const adminId = req.headers.get("X-Admin-ID")
+        const adminId = req.headers.get("X-Admin-ID");
         if (!adminId) {
             return NextResponse.json(
                 {
