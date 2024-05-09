@@ -92,6 +92,35 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
         }
     };
 
+    if (isFetching) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">Loading...</h3>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">
+                    Error fetching attorney profile, check your network and try
+                    again
+                </h3>
+            </div>
+        );
+    }
+
+    if (!attorney) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">
+                    Attorney profile not found
+                </h3>
+            </div>
+        );
+    }
+
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="sm" className="">
