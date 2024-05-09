@@ -97,7 +97,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
             <Container maxWidth="sm" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
-                        Create Attorney details
+                        Update Attorney details
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
                         {errorMessage && (
@@ -143,7 +143,6 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                             type="file"
                             label="Attorney Image *"
                             name="image"
-                            required
                             onChange={handleFileChange}
                         />
                         <button
