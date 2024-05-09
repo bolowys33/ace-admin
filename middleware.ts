@@ -12,7 +12,8 @@ export async function middleware(request: NextRequest) {
         (request.nextUrl.pathname.startsWith("/api/posts/") &&
             request.method === "GET") ||
         (request.nextUrl.pathname === "/api/admin" &&
-            request.method === "POST") || (request.nextUrl.pathname.startsWith("/api/attorneys/") &&
+            request.method === "POST") ||
+        (request.nextUrl.pathname.startsWith("/api/attorneys/") &&
             request.method === "GET")
     ) {
         return NextResponse.next();
@@ -35,7 +36,7 @@ export async function middleware(request: NextRequest) {
         );
         const response = NextResponse.next();
         response.headers.set("X-Admin-ID", decoded.payload.id as string);
-    
+
         return response;
     } catch (error) {
         if (error instanceof JWTExpired) {
