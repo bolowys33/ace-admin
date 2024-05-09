@@ -1,9 +1,43 @@
 import Link from "next/link";
 import Search from "./Search";
 import usePosts from "@/hooks/usePosts";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Posts = () => {
-    const { posts, isFetching, error } = usePosts();
+    const { posts, isFetching, error, getPosts } = usePosts();
+    const [deletingPostIds, setDeletingPostIds] = useState<
+        Record<string, boolean>
+    >({});
+    const [deletedPostId, setDeletedPostId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (deletedPostId) {
+            getPosts();
+            setDeletedPostId(null);
+        }
+    }, [deletedPostId, getPosts]);
+
+    const handleDeletePost = async (id: string, url: string) => {
+        const token = localStorage.getItem("token");
+
+        setDeletingPostIds((prevState) => ({ ...prevState, [id]: true }));
+        try {
+            await axios.delete(`/api/posts/${url}`, {
+                headers: {
+                    Authorization: token,
+                },
+            });
+            setDeletedPostId(id);
+        } catch (error) {
+            console.error("Error deleting attorney:", error);
+        } finally {
+            setDeletingPostIds((prevState) => ({
+                ...prevState,
+                [id]: false,
+            }));
+        }
+    };
 
     if (error) {
         return (
@@ -137,8 +171,17 @@ const Posts = () => {
                                         </Link>
                                         <button
                                             type="button"
-                                            className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#57202b]">
-                                            Delete
+                                            onClick={() =>
+                                                handleDeletePost(
+                                                    post._id,
+                                                    post.post_url
+                                                )
+                                            }
+                                            disabled={deletingPostIds[post._id]}
+                                            className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#521e28]">
+                                            {deletingPostIds[post._id]
+                                                ? "Deleting..."
+                                                : "Delete"}
                                         </button>
                                     </td>
                                 </tr>
