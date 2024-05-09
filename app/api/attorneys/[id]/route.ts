@@ -17,7 +17,7 @@ export async function PUT(
                 { status: 400 }
             );
 
-        const adminId = req.headers.get("X-Admin-ID")
+        const adminId = req.headers.get("X-Admin-ID");
         if (!adminId) {
             return NextResponse.json(
                 {
@@ -134,7 +134,7 @@ export async function DELETE(
 ): Promise<Response> {
     try {
         await connectDB();
-        
+
         const { id } = params;
         if (!id)
             return NextResponse.json(
@@ -142,7 +142,7 @@ export async function DELETE(
                 { status: 400 }
             );
 
-        const adminId = req.headers.get("X-Admin-ID")
+        const adminId = req.headers.get("X-Admin-ID");
         if (!adminId) {
             return NextResponse.json(
                 {
@@ -166,6 +166,47 @@ export async function DELETE(
 
         return NextResponse.json(
             { success: true, message: "Attorney deleted successfully" },
+            { status: 200 }
+        );
+    } catch (error) {
+        if (error instanceof Error) {
+            return NextResponse.json(
+                { success: false, message: error.message },
+                { status: 400 }
+            );
+        } else {
+            return NextResponse.json(
+                { success: false, message: "An unknown error occurred" },
+                { status: 500 }
+            );
+        }
+    }
+}
+
+export async function GET(
+    req: Request,
+    { params }: { params: { id: string } }
+): Promise<Response> {
+    try {
+        await connectDB();
+
+        const { id } = params;
+        if (!id)
+            return NextResponse.json(
+                { success: false, message: "Please provide attorney id" },
+                { status: 400 }
+            );
+
+        const attorney = await Attorney.findById(id).select("-__v");
+        if (!attorney) {
+            return NextResponse.json(
+                { success: false, message: "Attorney not found" },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json(
+            { success: true, data: attorney },
             { status: 200 }
         );
     } catch (error) {

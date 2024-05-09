@@ -30,8 +30,16 @@ export default async function uploadImage(
             publicId: uploadedResponse.public_id,
         };
     } catch (error: any) {
-        throw new Error(`Error uploading image: ${error.message}`);
-    }
+        // Check if the error is from the Cloudinary API
+        if (error.error) {
+          // The error object from Cloudinary API has a specific structure
+          const cloudinaryError = error.error;
+          throw new Error(`Error uploading image: ${cloudinaryError.message}`);
+        } else {
+          // Handle other types of errors
+          throw new Error(`Error uploading image: Network error `);
+        }
+      }
 }
 
 export async function deleteImage(publicId: string, action: string) {

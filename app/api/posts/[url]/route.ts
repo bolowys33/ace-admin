@@ -174,7 +174,7 @@ export async function DELETE(
             );
         }
 
-        await Post.deleteOne({});
+        await Post.deleteOne({post_url: url});
         return NextResponse.json(
             { success: true, message: "Post deleted successfully" },
             { status: 200 }

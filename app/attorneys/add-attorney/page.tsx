@@ -2,31 +2,29 @@
 
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
-import JoditEditor from "jodit-react";
-import { ChangeEvent, useRef, useState } from "react";
-import "./jodit-custom.css"; // Import your custom CSS file
-import DOMPurify from "dompurify";
 import axios from "axios";
+import { ChangeEvent, useState } from "react";
 
-const AddPost = () => {
+const AddAtorney = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
     const [inputData, setInputData] = useState({
-        title: "",
-        content: "",
+        firstname: "",
+        lastname: "",
+        position: "",
     });
+    const [image, setImage] = useState<File | null>(null);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
     };
 
-    const cleanContent = DOMPurify.sanitize(inputData.content);
-
-    const editor = useRef(null);
-    const config = {
-        height: "350px",
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setImage(e.target.files[0]);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,13 +34,14 @@ const AddPost = () => {
         setSuccess(false);
 
         const formData = new FormData();
-        formData.append("title", inputData.title);
-        formData.append("content", cleanContent);
+        formData.append("name", `${inputData.firstname} ${inputData.lastname}`);
+        formData.append("position", inputData.position);
+        if (image) formData.append("image", image);
 
         try {
             const token = localStorage.getItem("token");
 
-            const response = await axios.post("/api/posts", formData, {
+            const response = await axios.post("/api/attorneys", formData, {
                 headers: {
                     Authorization: token,
                 },
@@ -51,9 +50,11 @@ const AddPost = () => {
             if (response.status === 201) {
                 setSuccess(true);
                 setInputData({
-                    title: "",
-                    content: "",
+                    firstname: "",
+                    lastname: "",
+                    position: "",
                 });
+                setImage(null);
                 setTimeout(() => setSuccess(false), 10000);
             } else {
                 setError(response.data.message);
@@ -62,7 +63,7 @@ const AddPost = () => {
             if (axios.isAxiosError(error)) {
                 setError(
                     error.response?.data.message ||
-                        "Error creating post, try again"
+                        "Error adding attorney, try again"
                 );
                 setTimeout(() => setError(""), 10000);
             } else {
@@ -76,48 +77,56 @@ const AddPost = () => {
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="md" className="">
+            <Container maxWidth="sm" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
-                        Create a blog post
+                        Create Attorney details
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
                         {error && <Alert severity="error">{error}</Alert>}
                         {success && (
                             <Alert severity="success">
-                                Post created successfully!
+                                Attorney added successfully!
                             </Alert>
                         )}
                     </div>
                     <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col items-center md:w-[95%] my-6 mx-auto">
+                        className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                         <InputField
                             type="text"
-                            label="Post title *"
-                            placeholder="Enter post title"
-                            name="title"
-                            value={inputData.title}
+                            label="First Name *"
+                            placeholder="Enter Firstname"
+                            name="firstname"
+                            value={inputData.firstname}
                             required
                             onChange={handleChange}
                         />
-                        <div className="w-full space-y-3 my-4">
-                            <label htmlFor="content" className="text-left p-2">
-                                Post content *
-                            </label>
-                            <JoditEditor
-                                ref={editor}
-                                config={config}
-                                value={inputData.content}
-                                onBlur={(newContent) =>
-                                    setInputData({
-                                        ...inputData,
-                                        content: newContent,
-                                    })
-                                }
-                                className="w-full bg-[#2e374a] rounded-lg text-black outline-none"
-                            />
-                        </div>
+                        <InputField
+                            type="text"
+                            label="Last Name *"
+                            placeholder="Enter Lastname"
+                            name="lastname"
+                            value={inputData.lastname}
+                            required
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            type="text"
+                            label="Position held *"
+                            placeholder="Enter position"
+                            name="position"
+                            required
+                            value={inputData.position}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            type="file"
+                            label="Attorney Image *"
+                            name="image"
+                            required
+                            onChange={handleFileChange}
+                        />
                         <button
                             type="submit"
                             disabled={isloading}
@@ -126,7 +135,7 @@ const AddPost = () => {
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
                             }`}>
-                            {isloading ? "Creating" : "Add post"}
+                            {isloading ? "Loading" : "Add attorney"}
                         </button>
                     </form>
                 </Box>
@@ -135,4 +144,4 @@ const AddPost = () => {
     );
 };
 
-export default AddPost;
+export default AddAtorney;

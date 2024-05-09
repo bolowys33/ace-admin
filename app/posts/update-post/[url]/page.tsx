@@ -3,26 +3,39 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
-import { ChangeEvent, useRef, useState } from "react";
-import "./jodit-custom.css"; // Import your custom CSS file
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import "@/app/posts/add-post/jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
+import useSinglePost from "@/hooks/useSinglePost";
 
-const AddPost = () => {
-    const [error, setError] = useState("");
+const UpdatePost = ({ params }: { params: { url: string } }) => {
+    const { url } = params;
+    const { post, error, isFetching } = useSinglePost(url);
+
+    const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
-    const [inputData, setInputData] = useState({
-        title: "",
-        content: "",
-    });
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputData({ ...inputData, [e.target.name]: e.target.value });
+    useEffect(() => {
+        if (post) {
+            setTitle(post.title);
+            setContent(post.content);
+        }
+    }, [post]);
+
+    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
     };
 
-    const cleanContent = DOMPurify.sanitize(inputData.content);
+    const handleContentChange = (newContent: string) => {
+        setContent(newContent);
+    };
+
+    const cleanContent = DOMPurify.sanitize(content);
 
     const editor = useRef(null);
     const config = {
@@ -32,60 +45,87 @@ const AddPost = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        setError("");
+        setErrorMessage("");
         setSuccess(false);
 
         const formData = new FormData();
-        formData.append("title", inputData.title);
+        formData.append("title", title);
         formData.append("content", cleanContent);
 
         try {
             const token = localStorage.getItem("token");
 
-            const response = await axios.post("/api/posts", formData, {
+            const response = await axios.put(`/api/posts/${url}`, formData, {
                 headers: {
                     Authorization: token,
                 },
             });
 
             if (response.status === 201) {
+                localStorage.setItem("token", response.data.token);
                 setSuccess(true);
-                setInputData({
-                    title: "",
-                    content: "",
-                });
+                setTitle("");
+                setContent("");
                 setTimeout(() => setSuccess(false), 10000);
             } else {
-                setError(response.data.message);
+                setErrorMessage(response.data.message);
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                setError(
+                setErrorMessage(
                     error.response?.data.message ||
-                        "Error creating post, try again"
+                        "Error updating post, try again"
                 );
-                setTimeout(() => setError(""), 10000);
+                setTimeout(() => setErrorMessage(""), 10000);
             } else {
-                setError("An unknown error occurred");
+                setErrorMessage("An unknown error occurred");
             }
-            setTimeout(() => setError(""), 10000);
+            setTimeout(() => setErrorMessage(""), 10000);
         } finally {
             setIsLoading(false);
         }
     };
+
+    if (isFetching) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">Loading...</h3>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">
+                    Error fetching post, check your network and try again
+                </h3>
+            </div>
+        );
+    }
+
+    if (!post) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[500px] w-full">
+                <h3 className="place-self-center text-xl">Post not found</h3>
+            </div>
+        );
+    }
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
             <Container maxWidth="md" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
-                        Create a blog post
+                        Update Blog Post
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
-                        {error && <Alert severity="error">{error}</Alert>}
+                        {errorMessage && (
+                            <Alert severity="error">{errorMessage}</Alert>
+                        )}
                         {success && (
                             <Alert severity="success">
-                                Post created successfully!
+                                Post updated successfully!
                             </Alert>
                         )}
                     </div>
@@ -97,9 +137,9 @@ const AddPost = () => {
                             label="Post title *"
                             placeholder="Enter post title"
                             name="title"
-                            value={inputData.title}
+                            value={title}
                             required
-                            onChange={handleChange}
+                            onChange={handleTitleChange}
                         />
                         <div className="w-full space-y-3 my-4">
                             <label htmlFor="content" className="text-left p-2">
@@ -108,13 +148,8 @@ const AddPost = () => {
                             <JoditEditor
                                 ref={editor}
                                 config={config}
-                                value={inputData.content}
-                                onBlur={(newContent) =>
-                                    setInputData({
-                                        ...inputData,
-                                        content: newContent,
-                                    })
-                                }
+                                value={content}
+                                onBlur={handleContentChange}
                                 className="w-full bg-[#2e374a] rounded-lg text-black outline-none"
                             />
                         </div>
@@ -126,7 +161,7 @@ const AddPost = () => {
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
                             }`}>
-                            {isloading ? "Creating" : "Add post"}
+                            {isloading ? "Updating..." : "Update post"}
                         </button>
                     </form>
                 </Box>
@@ -135,4 +170,4 @@ const AddPost = () => {
     );
 };
 
-export default AddPost;
+export default UpdatePost;
