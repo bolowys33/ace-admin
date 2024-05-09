@@ -6,10 +6,8 @@ import axios from "axios";
 
 const Attorneys = () => {
     const { attorneys, isFetching, error, getAttorneys } = useAttorneys();
-    const [isDeleting, setIsDeleting] = useState(false);
-    const [deletedAttorneyId, setDeletedAttorneyId] = useState<string | null>(
-        null
-    );
+    const [deletingAttorneyIds, setDeletingAttorneyIds] = useState<Record<string, boolean>>({});
+    const [deletedAttorneyId, setDeletedAttorneyId] = useState<string | null>(null);
 
     useEffect(() => {
         if (deletedAttorneyId) {
@@ -18,15 +16,18 @@ const Attorneys = () => {
         }
     }, [deletedAttorneyId, getAttorneys]);
 
-    const handleDeleteAttorney = async (id: string): Promise<void> => {
-        setIsDeleting(true);
+    const handleDeleteAttorney = async (id: string) => {
+        setDeletingAttorneyIds((prevState) => ({ ...prevState, [id]: true }));
         try {
             await axios.delete(`/api/attorneys/${id}`);
             setDeletedAttorneyId(id);
         } catch (error) {
             console.error("Error deleting attorney:", error);
         } finally {
-            setIsDeleting(false);
+            setDeletingAttorneyIds((prevState) => ({
+                ...prevState,
+                [id]: false,
+            }));
         }
     };
 
@@ -168,9 +169,13 @@ const Attorneys = () => {
                                                     attorney._id
                                                 )
                                             }
-                                            disabled={isDeleting}
+                                            disabled={
+                                                deletingAttorneyIds[
+                                                    attorney._id
+                                                ]
+                                            }
                                             className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#521e28]">
-                                            {isDeleting
+                                            {deletingAttorneyIds[attorney._id]
                                                 ? "Deleting..."
                                                 : "Delete"}
                                         </button>
