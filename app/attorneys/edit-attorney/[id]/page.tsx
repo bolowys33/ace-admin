@@ -143,6 +143,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                             type="file"
                             label="Attorney Image *"
                             name="image"
+                            required={false}
                             onChange={handleFileChange}
                         />
                         <button
@@ -153,7 +154,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
                             }`}>
-                            {isloading ? "Loading" : "Add attorney"}
+                            {isloading ? "Updating..." : "Update attorney"}
                         </button>
                     </form>
                 </Box>
