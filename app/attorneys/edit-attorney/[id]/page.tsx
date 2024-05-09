@@ -1,3 +1,5 @@
+"use client"
+
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
