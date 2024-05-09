@@ -41,26 +41,28 @@ const Attorneys = () => {
         return (
             <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
                 <div className="flex items-center justify-between">
-                    <Search placeholder="Search for an attorney" />
+                    <Search placeholder="Search for a post" />
                     <Link
-                        href="/attorneys/add-attorney"
+                        href="/posts/add-post"
                         className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
                         Add new
                     </Link>
                 </div>
-                <table className="w-full my-5">
+                <table className="w-full">
                     <thead>
                         <tr>
-                            <td className="px-2 pb-3 w-2/5">Name</td>
-                            <td className="px-2 pb-3 w-[30%]">Role</td>
-                            <td className="px-2 pb-3 w-[10%]">Date added</td>
+                            <td className="px-2 pb-3 w-[50%]">Title</td>
+                            <td className="px-2 pb-3 w-[15%]">Date added</td>
+                            <td className="px-2 pb-3 w-[15%]">Comments</td>
                             <td className="px-2 pb-3 w-[20%]">Action</td>
                         </tr>
                     </thead>
                 </table>
-                <h3 className="place-self-center mt-[150px] text-xl">
-                    Error fetching attorneys, check your network and try again
+                <div className="grid place-items-center h-[70%]">
+                <h3 className="text-xl">
+                    Error fetching attorneys, check your network and try again.
                 </h3>
+                </div>
             </div>
         );
     }
@@ -124,7 +126,8 @@ const Attorneys = () => {
                 </Link>
             </div>
             {!isFetching && attorneys?.length == 0 ? (
-                <h3 className="place-self-center mt-[150px] text-xl">
+                <div className="grid place-items-center h-[70%]">
+                    <h3 className="text-xl">
                     No attorney profile found, click{" "}
                     <Link
                         href="/attorneys/add-attorney"
@@ -133,6 +136,7 @@ const Attorneys = () => {
                     </Link>{" "}
                     to add new attorney
                 </h3>
+                </div>
             ) : (
                 <div>
                     <table className="w-full my-5">
