@@ -1,9 +1,34 @@
 import Link from "next/link";
 import Search from "./Search";
 import useAttorneys from "@/hooks/useAttorneys";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Attorneys = () => {
-    const { attorneys, isFetching, error } = useAttorneys();
+    const { attorneys, isFetching, error, getAttorneys } = useAttorneys();
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [deletedAttorneyId, setDeletedAttorneyId] = useState<string | null>(
+        null
+    );
+
+    useEffect(() => {
+        if (deletedAttorneyId) {
+            getAttorneys();
+            setDeletedAttorneyId(null);
+        }
+    }, [deletedAttorneyId, getAttorneys]);
+
+    const handleDeleteAttorney = async (id: string): Promise<void> => {
+        setIsDeleting(true);
+        try {
+            await axios.delete(`/api/attorneys/${id}`);
+            setDeletedAttorneyId(id);
+        } catch (error) {
+            console.error("Error deleting attorney:", error);
+        } finally {
+            setIsDeleting(false);
+        }
+    };
 
     if (error) {
         return (
@@ -128,7 +153,7 @@ const Attorneys = () => {
                                     <td className="p-2">{attorney.position}</td>
                                     <td className="p-2">20-12-2024</td>
                                     <td className="p-2 space-x-2">
-                                    <Link
+                                        <Link
                                             href={`/attorneys/edit-attorney/${attorney._id}`}>
                                             <button
                                                 type="button"
@@ -138,6 +163,12 @@ const Attorneys = () => {
                                         </Link>
                                         <button
                                             type="button"
+                                            onClick={() =>
+                                                handleDeleteAttorney(
+                                                    attorney._id
+                                                )
+                                            }
+                                            disabled={isDeleting}
                                             className="py-1 px-2 rounded-md bg-[crimson]">
                                             Delete
                                         </button>
