@@ -6,8 +6,12 @@ import axios from "axios";
 
 const Attorneys = () => {
     const { attorneys, isFetching, error, getAttorneys } = useAttorneys();
-    const [deletingAttorneyIds, setDeletingAttorneyIds] = useState<Record<string, boolean>>({});
-    const [deletedAttorneyId, setDeletedAttorneyId] = useState<string | null>(null);
+    const [deletingAttorneyIds, setDeletingAttorneyIds] = useState<
+        Record<string, boolean>
+    >({});
+    const [deletedAttorneyId, setDeletedAttorneyId] = useState<string | null>(
+        null
+    );
 
     useEffect(() => {
         if (deletedAttorneyId) {
@@ -17,7 +21,7 @@ const Attorneys = () => {
     }, [deletedAttorneyId, getAttorneys]);
 
     const handleDeleteAttorney = async (id: string) => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
 
         setDeletingAttorneyIds((prevState) => ({ ...prevState, [id]: true }));
         try {
@@ -59,9 +63,10 @@ const Attorneys = () => {
                     </thead>
                 </table>
                 <div className="grid place-items-center h-[70%]">
-                <h3 className="text-xl">
-                    Error fetching attorneys, check your network and try again.
-                </h3>
+                    <h3 className="text-xl">
+                        Error fetching attorneys, check your network and try
+                        again.
+                    </h3>
                 </div>
             </div>
         );
@@ -128,14 +133,14 @@ const Attorneys = () => {
             {!isFetching && attorneys?.length == 0 ? (
                 <div className="grid place-items-center h-[70%]">
                     <h3 className="text-xl">
-                    No attorney profile found, click{" "}
-                    <Link
-                        href="/attorneys/add-attorney"
-                        className="underline text-blue-500">
-                        here
-                    </Link>{" "}
-                    to add new attorney
-                </h3>
+                        No attorney profile found, click{" "}
+                        <Link
+                            href="/attorneys/add-attorney"
+                            className="underline text-blue-500">
+                            here
+                        </Link>{" "}
+                        to add new attorney
+                    </h3>
                 </div>
             ) : (
                 <div>
