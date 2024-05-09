@@ -15,7 +15,7 @@ interface AttorneyResponse {
     message: string | null;
 }
 
-const useSingleAttorney = (url: string) => {
+const useSingleAttorney = (id: string) => {
     const [attorney, setAttorney] = useState<Attorney | null>(null);
     const [isFetching, setIsFetching] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ const useSingleAttorney = (url: string) => {
 
         try {
             const response: AxiosResponse<AttorneyResponse> = await axios.get(
-                `/api/attorneys/${url}`
+                `/api/attorneys/${id}`
             );
             if (response.data.success) {
                 setAttorney(response.data.data);
@@ -41,12 +41,12 @@ const useSingleAttorney = (url: string) => {
     };
 
     useEffect(() => {
-        if (url) {
+        if (id) {
             getPost();
         } else {
             setIsFetching(false);
         }
-    }, [url]);
+    }, [id]);
 
     return { attorney, isFetching, error };
 };
