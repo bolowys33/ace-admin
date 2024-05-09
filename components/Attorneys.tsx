@@ -17,9 +17,15 @@ const Attorneys = () => {
     }, [deletedAttorneyId, getAttorneys]);
 
     const handleDeleteAttorney = async (id: string) => {
+        const token = localStorage.getItem("token")
+
         setDeletingAttorneyIds((prevState) => ({ ...prevState, [id]: true }));
         try {
-            await axios.delete(`/api/attorneys/${id}`);
+            await axios.delete(`/api/attorneys/${id}`, {
+                headers: {
+                    Authorization: token,
+                },
+            });
             setDeletedAttorneyId(id);
         } catch (error) {
             console.error("Error deleting attorney:", error);
