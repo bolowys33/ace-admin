@@ -2,6 +2,7 @@ import useSinglePost from "@/hooks/useSinglePost";
 import { Container } from "@mui/material";
 import Link from "next/link";
 import ReactHtmlParser from "html-react-parser";
+import Comments from "./Comments";
 
 const SinglePost = ({ url }: { url: string }) => {
     const { post, error, isFetching } = useSinglePost(url);
@@ -54,21 +55,21 @@ const SinglePost = ({ url }: { url: string }) => {
                         Update Post
                     </Link>
                     <Container
-                    maxWidth="md"
-                    className="space-y-4 font-poppins text-justify font-medium">
-                    <div className="text-center my-5 space-y-2">
-                        <h1 className="font-bold text-2xl md:text-4xl ">
-                            {post?.title}
-                        </h1>
-                        <p className="text-[#b7bac1] text-sm">
-                            {post?.date_created} | 15 comments
-                        </p>
-                    </div>
-                    <div className="space-y-3 list-style">
-                        {ReactHtmlParser(post?.content as string)}
-                    </div>
-                    
-                </Container>
+                        maxWidth="md"
+                        className="space-y-4 font-poppins text-justify font-medium">
+                        <div className="text-center my-5 space-y-2">
+                            <h1 className="font-bold text-2xl md:text-4xl ">
+                                {post?.title}
+                            </h1>
+                            <p className="text-[#b7bac1] text-sm">
+                                {post?.date_created} | 15 comments
+                            </p>
+                        </div>
+                        <div className="space-y-3 list-style">
+                            {ReactHtmlParser(post?.content as string)}
+                        </div>
+                        <Comments />
+                    </Container>
                 </div>
             )}
         </div>
