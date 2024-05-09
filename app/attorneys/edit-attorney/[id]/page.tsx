@@ -23,7 +23,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
 
     useEffect(() => {
         if (attorney) {
-            const name = attorney.name.split("");
+            const name = attorney.name.split(" ");
             setInputData({
                 firstname: name[0],
                 lastname: name[1],
@@ -141,7 +141,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                         />
                         <InputField
                             type="file"
-                            label="Attorney Image *"
+                            label="Attorney Image "
                             name="image"
                             required={false}
                             onChange={handleFileChange}
