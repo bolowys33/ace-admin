@@ -128,11 +128,14 @@ const Attorneys = () => {
                                     <td className="p-2">{attorney.position}</td>
                                     <td className="p-2">20-12-2024</td>
                                     <td className="p-2 space-x-2">
-                                        <button
-                                            type="button"
-                                            className="py-1 px-2 rounded-md bg-[teal]">
-                                            Edit
-                                        </button>
+                                    <Link
+                                            href={`/attorneys/attorney/${attorney._id}`}>
+                                            <button
+                                                type="button"
+                                                className="py-1 px-2 rounded-md bg-[teal] hover:bg-[#103131]">
+                                                Edit
+                                            </button>
+                                        </Link>
                                         <button
                                             type="button"
                                             className="py-1 px-2 rounded-md bg-[crimson]">
