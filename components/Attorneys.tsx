@@ -52,7 +52,7 @@ const Attorneys = () => {
                         Add new
                     </Link>
                 </div>
-                <table className="w-full">
+                <table className="w-full mt-5">
                     <thead>
                         <tr>
                             <td className="px-2 pb-3 w-[50%]">Title</td>

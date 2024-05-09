@@ -50,7 +50,7 @@ const Posts = () => {
                         Add new
                     </Link>
                 </div>
-                <table className="w-full my-5">
+                <table className="w-full mt-5">
                     <thead>
                         <tr>
                             <td className="px-2 pb-3 w-[50%]">Title</td>
@@ -60,9 +60,12 @@ const Posts = () => {
                         </tr>
                     </thead>
                 </table>
-                <h3 className="place-self-center mt-[150px] text-xl">
-                    Error fetching posts, check your network and try again.
-                </h3>
+                <div className="grid place-items-center h-[70%]">
+                    <h3 className="text-xl">
+                        Error fetching posts, check your network and try
+                        again.
+                    </h3>
+                </div>
             </div>
         );
     }
@@ -126,6 +129,7 @@ const Posts = () => {
                 </Link>
             </div>
             {!isFetching && posts?.length == 0 ? (
+                <div className="grid place-items-center h-[70%]">
                 <h3 className="place-self-center mt-[150px] text-xl">
                     No post found, click{" "}
                     <Link
@@ -135,6 +139,7 @@ const Posts = () => {
                     </Link>{" "}
                     to create new post.
                 </h3>
+                </div>
             ) : (
                 <div>
                     <table className="w-full my-5">
