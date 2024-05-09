@@ -4,12 +4,12 @@ import InputField from "@/components/InputField";
 import useSingleAttorney from "@/hooks/useSingleAttorney";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const EditAttorney = ({ params }: { params: { id: string } }) => {
     const { id } = params;
 
-    const {attorney, isFetching, error} = useSingleAttorney(id)
+    const { attorney, isFetching, error } = useSingleAttorney(id);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
@@ -20,6 +20,18 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
         lastname: "",
         position: "",
     });
+
+    useEffect(() => {
+        if (attorney) {
+            const name = attorney.name.split("");
+            setInputData({
+                firstname: name[0],
+                lastname: name[1],
+                position: attorney.position,
+            });
+        }
+    }, [attorney]);
+
     const [image, setImage] = useState<File | null>(null);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +100,9 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                         Create Attorney details
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
-                        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+                        {errorMessage && (
+                            <Alert severity="error">{errorMessage}</Alert>
+                        )}
                         {success && (
                             <Alert severity="success">
                                 Attorney added successfully!
