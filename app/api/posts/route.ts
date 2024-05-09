@@ -6,7 +6,7 @@ export async function GET(): Promise<Response> {
     try {
         await connectDB();
 
-        const posts = await Post.find({}).select("-__v").limit(8);
+        const posts = await Post.find({}).select("-__v");
         if (posts.length === 0) {
             return NextResponse.json(
                 { success: false, message: "No post found" },
