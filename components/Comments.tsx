@@ -25,12 +25,12 @@ const Comments = () => {
                         key={comment.id}
                         className="bg-[#2e374a] p-4 rounded-md">
                         <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-bold text">{comment.author}</h3>
-                            <p className="text-gray-500 text-sm">
+                            <h3 className="font-bold text-[#b7bac1]">{comment.author}</h3>
+                            <p className="text-[#b7bac1] text-sm">
                                 {new Date(comment.date).toLocaleString()}
                             </p>
                         </div>
-                        <p className="text-gray-800">{comment.content}</p>
+                        <p className="">{comment.content}</p>
                     </div>
                 ))}
             </div>
