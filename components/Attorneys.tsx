@@ -121,7 +121,7 @@ const Attorneys = () => {
     }
 
     return (
-        <div className="flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
+        <div className="flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm min-h-[500px]">
             <div className="flex items-center justify-between">
                 <Search placeholder="Search for an attorney" />
                 <Link
