@@ -17,8 +17,8 @@ const Comments = () => {
     ];
 
     return (
-        <Container className="mt-8">
-            <h2 className="text-xl font-bold mb-4">Comments</h2>
+        <Container maxWidth="sm" className="mt-14">
+            <h2 className="text-xl font-bold mb-4 text-center">Comments</h2>
             <div className="space-y-4">
                 {comments.map((comment) => (
                     <div
