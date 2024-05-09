@@ -68,8 +68,8 @@ const SinglePost = ({ url }: { url: string }) => {
                         <div className="space-y-3 list-style">
                             {ReactHtmlParser(post?.content as string)}
                         </div>
-                        <Comments />
                     </Container>
+                        <Comments />
                 </div>
             )}
         </div>
