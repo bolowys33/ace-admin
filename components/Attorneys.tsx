@@ -169,8 +169,10 @@ const Attorneys = () => {
                                                 )
                                             }
                                             disabled={isDeleting}
-                                            className="py-1 px-2 rounded-md bg-[crimson]">
-                                            Delete
+                                            className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#521e28]">
+                                            {isDeleting
+                                                ? "Deleting..."
+                                                : "Delete"}
                                         </button>
                                     </td>
                                 </tr>
