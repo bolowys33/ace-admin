@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField";
+import useSingleAttorney from "@/hooks/useSingleAttorney";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
@@ -8,7 +9,9 @@ import { ChangeEvent, useState } from "react";
 const EditAttorney = ({ params }: { params: { id: string } }) => {
     const { id } = params;
 
-    const [error, setError] = useState("");
+    const {attorney, isFetching, error} = useSingleAttorney(id)
+
+    const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
 
@@ -32,7 +35,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        setError("");
+        setErrorMessage("");
         setSuccess(false);
 
         const formData = new FormData();
@@ -59,19 +62,19 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                 setImage(null);
                 setTimeout(() => setSuccess(false), 10000);
             } else {
-                setError(response.data.message);
+                setErrorMessage(response.data.message);
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                setError(
+                setErrorMessage(
                     error.response?.data.message ||
                         "Error adding attorney, try again"
                 );
-                setTimeout(() => setError(""), 10000);
+                setTimeout(() => setErrorMessage(""), 10000);
             } else {
-                setError("An unknown error occurred");
+                setErrorMessage("An unknown error occurred");
             }
-            setTimeout(() => setError(""), 10000);
+            setTimeout(() => setErrorMessage(""), 10000);
         } finally {
             setIsLoading(false);
         }
@@ -85,7 +88,7 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
                         Create Attorney details
                     </h2>
                     <div className="text-center w-max mx-auto mt-8">
-                        {error && <Alert severity="error">{error}</Alert>}
+                        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
                         {success && (
                             <Alert severity="success">
                                 Attorney added successfully!
