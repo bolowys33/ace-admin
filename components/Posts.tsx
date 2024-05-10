@@ -5,18 +5,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Posts = () => {
-    const { posts, isFetching, error, getPosts } = usePosts();
-    const [deletingPostIds, setDeletingPostIds] = useState<
-        Record<string, boolean>
-    >({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [limit, setLimit] = useState(2);
+    const { posts, isFetching, error, getPosts, pagination } = usePosts();
+    const [deletingPostIds, setDeletingPostIds] = useState<Record<string, boolean>>({});
     const [deletedPostId, setDeletedPostId] = useState<string | null>(null);
 
     useEffect(() => {
         if (deletedPostId) {
-            getPosts();
+            getPosts(currentPage);
             setDeletedPostId(null);
         }
-    }, [deletedPostId, getPosts]);
+    }, [deletedPostId, getPosts, currentPage]);
 
     const handleDeletePost = async (id: string, url: string) => {
         const token = localStorage.getItem("token");
@@ -36,6 +36,13 @@ const Posts = () => {
                 ...prevState,
                 [id]: false,
             }));
+        }
+    };
+
+    const loadMorePosts = () => {
+        if (pagination && pagination.hasMore) {
+            setLimit(limit + 2);
+            getPosts(undefined, limit + 2);
         }
     };
 
@@ -124,21 +131,20 @@ const Posts = () => {
                 <Search placeholder="Search for an post" />
                 <Link
                     href="/posts/add-post"
-                    className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md">
+                    className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md"
+                >
                     Add new
                 </Link>
             </div>
-            {!isFetching && posts?.length == 0 ? (
+            {!isFetching && posts?.length === 0 ? (
                 <div className="grid place-items-center h-[70%]">
-                <h3 className="place-self-center mt-[150px] text-xl">
-                    No post found, click{" "}
-                    <Link
-                        href="/posts/add-post"
-                        className="underline text-blue-500">
-                        here
-                    </Link>{" "}
-                    to create new post.
-                </h3>
+                    <h3 className="place-self-center mt-[150px] text-xl">
+                        No post found, click{" "}
+                        <Link href="/posts/add-post" className="underline text-blue-500">
+                            here
+                        </Link>{" "}
+                        to create new post.
+                    </h3>
                 </div>
             ) : (
                 <div>
@@ -146,53 +152,51 @@ const Posts = () => {
                         <thead>
                             <tr>
                                 <td className="px-2 pb-3 w-[50%]">Title</td>
-                                <td className="px-2 pb-3 w-[15%]">
-                                    Date added
-                                </td>
+                                <td className="px-2 pb-3 w-[15%]">Date added</td>
                                 <td className="px-2 pb-3 w-[15%]">Comments</td>
                                 <td className="px-2 pb-3 w-[20%]">Action</td>
                             </tr>
                         </thead>
                         <tbody>
                             {posts?.map((post) => (
-                                <tr>
+                                <tr key={post._id}>
                                     <td className="p-2">
-                                        <div className="flex items-center gap-2">
-                                            {post.title}
-                                        </div>
+                                        <div className="flex items-center gap-2">{post.title}</div>
                                     </td>
-                                    <td className="p-2">
-                                        {post.date_created.split("T")[0]}
-                                    </td>
+                                    <td className="p-2">{post.date_created.split("T")[0]}</td>
                                     <td className="p-2">10 comments</td>
                                     <td className="p-2 space-x-2">
-                                        <Link
-                                            href={`/posts/post/${post.post_url}`}>
+                                        <Link href={`/posts/post/${post.post_url}`}>
                                             <button
                                                 type="button"
-                                                className="py-1 px-2 rounded-md bg-[teal] hover:bg-[#103131]">
+                                                className="py-1 px-2 rounded-md bg-[teal] hover:bg-[#103131]"
+                                            >
                                                 View
                                             </button>
                                         </Link>
                                         <button
                                             type="button"
-                                            onClick={() =>
-                                                handleDeletePost(
-                                                    post._id,
-                                                    post.post_url
-                                                )
-                                            }
+                                            onClick={() => handleDeletePost(post._id, post.post_url)}
                                             disabled={deletingPostIds[post._id]}
-                                            className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#521e28]">
-                                            {deletingPostIds[post._id]
-                                                ? "Deleting..."
-                                                : "Delete"}
+                                            className="py-1 px-2 rounded-md bg-[crimson] hover:bg-[#521e28]"
+                                        >
+                                            {deletingPostIds[post._id] ? "Deleting..." : "Delete"}
                                         </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    {pagination && pagination.hasMore && (
+                        <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto block"
+                            onClick={loadMorePosts}
+                            disabled={isFetching}
+                        >
+                            {isFetching ? "Loading..." : "Load More"}
+                        </button>
+                    )}
+                    {`${limit} ${currentPage}`}
                 </div>
             )}
         </div>
