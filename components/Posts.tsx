@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Posts = () => {
-    const [limit, setLimit] = useState(2);
+    const [limit, setLimit] = useState(8);
     const { posts, isFetching, error, getPosts, pagination } = usePosts();
     const [deletingPostIds, setDeletingPostIds] = useState<
         Record<string, boolean>
@@ -57,7 +57,7 @@ const Posts = () => {
     const loadMorePosts = () => {
         if (pagination && pagination.hasMore) {
             setLimit(limit + 2);
-            getPosts(undefined, limit + 2);
+            getPosts(undefined, limit + 8);
         }
     };
 
