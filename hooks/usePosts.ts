@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useState, useEffect } from "react";
 
-interface Post {
+export interface Post {
     _id: string;
     title: string;
     content: string;
