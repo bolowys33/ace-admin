@@ -58,13 +58,13 @@ const MENU_LINKS: MenuLinks[] = [
         title: "Account Settings",
         links: [
             {
-                title: "Add Attorney",
-                path: "/add-atorney",
+                title: "My Account",
+                path: "/profile",
                 icon: React.createElement(PersonAddRounded),
             },
             {
-                title: "View Attorneys",
-                path: "/all-attorneys",
+                title: "Edit Profile",
+                path: "/edit-account",
                 icon: React.createElement(Groups2Rounded),
             },
         ],
