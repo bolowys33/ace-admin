@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { jwtVerify } from "jose";
+import { JWTVerifyResult, jwtVerify } from "jose";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -16,18 +16,19 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-
         if (token) {
+            setError(false);
             jwtVerify(
                 token,
                 new TextEncoder().encode(process.env.JWT_SECRET as string)
             )
-                .then((decodedToken) => {
+                .then((decodedToken: JWTVerifyResult<any>) => {
                     const { username, email, firstName, lastName } =
                         decodedToken.payload;
                     setUser({ username, email, firstName, lastName });
                 })
                 .catch((error) => {
+                    setError(true);
                     console.error("Token verification failed:", error);
                 });
         }
