@@ -1,3 +1,5 @@
+"use client"
+
 import { Container } from "@mui/material";
 import { JWTVerifyResult, jwtVerify } from "jose";
 import Link from "next/link";
@@ -33,6 +35,19 @@ const ProfilePage = () => {
                 });
         }
     }, []);
+
+    if (error) {
+        return (
+            <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[535px]">
+                <div className="grid place-items-center h-full">
+                    <h3 className="text-xl">
+                        Error getting profile, check your network and try
+                        again.
+                    </h3>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm min-h-[535px]">
