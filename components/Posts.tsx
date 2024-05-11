@@ -216,7 +216,9 @@ const Posts = () => {
                     </table>
                     {pagination && pagination.hasMore && (
                         <div>
-                            {error && (<p>Error loading more posts, try again</p>)}
+                            {error && (
+                                <p>Error loading more posts, try again</p>
+                            )}
                             <button
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto block"
                                 onClick={loadMorePosts}
