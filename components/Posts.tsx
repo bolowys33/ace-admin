@@ -61,7 +61,7 @@ const Posts = () => {
         }
     };
 
-    if (error && allPosts.length === 0 ) {
+    if (error && allPosts.length === 0) {
         return (
             <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[500px]">
                 <div className="flex items-center justify-between">
@@ -215,14 +215,16 @@ const Posts = () => {
                         </tbody>
                     </table>
                     {pagination && pagination.hasMore && (
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto block"
-                            onClick={loadMorePosts}
-                            disabled={isFetching}>
-                            {isFetching ? "Loading..." : "Load More"}
-                        </button>
+                        <div>
+                            {error && (<p>Error loading more posts, try again</p>)}
+                            <button
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto block"
+                                onClick={loadMorePosts}
+                                disabled={isFetching}>
+                                {isFetching ? "Loading..." : "Load More"}
+                            </button>
+                        </div>
                     )}
-                    {`${limit}`}
                 </div>
             )}
         </div>
