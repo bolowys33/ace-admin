@@ -96,20 +96,20 @@ const Attorneys = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.from({ length: 5 }, (_, index) => (
+                            {Array.from({ length: 6 }, (_, index) => (
                                 <tr key={index}>
                                     <td className="p-2">
-                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-8 bg-gray-500 animate-pulse"></div>
                                     </td>
                                     <td className="p-2">
-                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-8 bg-gray-500 animate-pulse"></div>
                                     </td>
                                     <td className="p-2">
-                                        <div className="h-6 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-8 bg-gray-500 animate-pulse"></div>
                                     </td>
                                     <td className="flex p-2 space-x-2">
-                                        <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
-                                        <div className="h-6 w-16 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-8 w-16 bg-gray-500 animate-pulse"></div>
+                                        <div className="h-8 w-16 bg-gray-500 animate-pulse"></div>
                                     </td>
                                 </tr>
                             ))}
