@@ -37,7 +37,7 @@ const usePosts = (): UsePosts => {
         PostResponse["pagination"] | null
     >(null);
 
-    const getPosts = async (page = 1, limit = 2, skip = 0): Promise<void> => {
+    const getPosts = async (page = 1, limit = 8, skip = 0): Promise<void> => {
         setIsFetching(true);
         setError(null);
         try {
