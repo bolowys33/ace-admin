@@ -3,7 +3,7 @@ import InputField from "./InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
 
-const ProfileForm = () => {
+const PasswordForm = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -123,4 +123,4 @@ const ProfileForm = () => {
     );
 };
 
-export default ProfileForm;
+export default PasswordForm;

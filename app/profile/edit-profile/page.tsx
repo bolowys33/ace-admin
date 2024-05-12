@@ -1,5 +1,7 @@
 "use client";
 
+import PasswordForm from "@/components/PasswordForm";
+import ProfileForm from "@/components/ProfileForm";
 import useAdmin from "@/hooks/useAdmin";
 import { useState } from "react";
 
@@ -43,6 +45,7 @@ const EditProfile = () => {
                 className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md self-end">
                 {isProfile ? "Change Password" : "Edit Profile"}
             </button>
+            {isProfile ? <ProfileForm admin={admin} />  : <PasswordForm /> }
         </div>
     );
 };
