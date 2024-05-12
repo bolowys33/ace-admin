@@ -43,9 +43,11 @@ const useAdmin = () => {
         } finally {
             setIsFetching(false);
         }
-
-        useEffect(() => {
-            getAdmin();
-        }, []);
     };
+
+    useEffect(() => {
+        getAdmin();
+    }, []);
+
+    return { admin, isFetching, error, getAdmin };
 };
