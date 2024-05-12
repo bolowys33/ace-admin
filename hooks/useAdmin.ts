@@ -51,3 +51,5 @@ const useAdmin = () => {
 
     return { admin, isFetching, error, getAdmin };
 };
+
+export default useAdmin

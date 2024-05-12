@@ -1,5 +1,6 @@
 "use client"
 
+import useAdmin from "@/hooks/useAdmin";
 import { Container } from "@mui/material";
 import { JWTVerifyResult, jwtVerify } from "jose";
 import Link from "next/link";
@@ -13,28 +14,9 @@ interface User {
 }
 
 const ProfilePage = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [error, setError] = useState<boolean>(false);
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            setError(false);
-            jwtVerify(
-                token,
-                new TextEncoder().encode(process.env.JWT_SECRET as string)
-            )
-                .then((decodedToken: JWTVerifyResult<any>) => {
-                    const { username, email, firstName, lastName } =
-                        decodedToken.payload;
-                    setUser({ username, email, firstName, lastName });
-                })
-                .catch((error) => {
-                    setError(true);
-                    console.error("Token verification failed:", error);
-                });
-        }
-    }, []);
+    
+    const {} = useAdmin()
+    
 
     if (error) {
         return (
