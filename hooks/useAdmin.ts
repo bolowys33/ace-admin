@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 interface Admin {
@@ -27,7 +27,7 @@ const useAdmin = () => {
         setError(null);
 
         try {
-            const { data } = await axios.get("/admin", {
+            const { data }: AxiosResponse<AdminResponse> = await axios.get("/admin", {
                 headers: {
                     Authorization: token,
                 },
