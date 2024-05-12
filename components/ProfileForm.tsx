@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import InputField from "./InputField";
 import { Alert, Box, Container } from "@mui/material";
 import { Admin } from "@/hooks/useAdmin";
+import axios from "axios";
 
 const ProfileForm = ({ admin }: { admin: Admin }) => {
     const [error, setError] = useState("");
@@ -16,6 +17,54 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError("");
+        setSuccess(false);
+
+        const token = localStorage.getItem("token")
+
+        const formData = new FormData();
+        formData.append("username", inputData.username);
+        formData.append("email", inputData.email);
+        formData.append("firstname", inputData.firstname);
+        formData.append("lastname", inputData.lastname);
+
+        try {
+            const response = await axios.put("/api/admin", formData, {
+                headers: {
+                    Authorization: token
+                }
+            });
+
+            if (response.status === 200) {
+                setSuccess(true);
+                setInputData({
+                    username: "",
+                    email: "",
+                    firstname: "",
+                    lastname: "",
+                });
+            } else {
+                setError(response.data.message);
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setError(
+                    error.response?.data.message ||
+                        "Error updating profile, try again"
+                );
+                setTimeout(() => setError(""), 10000);
+            } else {
+                setError("An unknown error occurred");
+            }
+            setTimeout(() => setError(""), 10000);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
