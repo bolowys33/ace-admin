@@ -28,7 +28,7 @@ const useAdmin = () => {
 
         try {
             const { data }: AxiosResponse<AdminResponse> = await axios.get(
-                "/admin",
+                "/api/admin",
                 {
                     headers: {
                         Authorization: token,
