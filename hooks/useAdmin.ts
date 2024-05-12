@@ -27,11 +27,14 @@ const useAdmin = () => {
         setError(null);
 
         try {
-            const { data }: AxiosResponse<AdminResponse> = await axios.get("/admin", {
-                headers: {
-                    Authorization: token,
-                },
-            });
+            const { data }: AxiosResponse<AdminResponse> = await axios.get(
+                "/admin",
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
 
             if (data.success) {
                 setAdmin(data.data);
@@ -52,4 +55,4 @@ const useAdmin = () => {
     return { admin, isFetching, error, getAdmin };
 };
 
-export default useAdmin
+export default useAdmin;
