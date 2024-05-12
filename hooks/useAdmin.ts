@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
-interface Admin {
+export interface Admin {
     _id: string;
     firstname: string;
     lastname: string;

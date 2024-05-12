@@ -1,3 +1,5 @@
+"use client";
+
 import useAdmin from "@/hooks/useAdmin";
 import { useState } from "react";
 
@@ -34,7 +36,15 @@ const EditProfile = () => {
         );
     }
 
-    return <div></div>;
+    return (
+        <div className="flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm min-h-[535px]">
+            <button
+                type="button"
+                className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md self-end">
+                Edit profile
+            </button>
+        </div>
+    );
 };
 
 export default EditProfile;
