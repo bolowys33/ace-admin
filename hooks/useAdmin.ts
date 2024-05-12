@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Admin {
     _id: string;
@@ -26,16 +26,26 @@ const useAdmin = () => {
         setIsFetching(true);
         setError(null);
 
-        const { data } = await axios.get("/admin", {
-            headers: {
-                Authorization: token,
-            },
-        });
+        try {
+            const { data } = await axios.get("/admin", {
+                headers: {
+                    Authorization: token,
+                },
+            });
 
-        if (data.success) {
-            setAdmin(data.data);
-        } else {
-            setError(data.message);
+            if (data.success) {
+                setAdmin(data.data);
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            setError("An error occurred while fetching admin.");
+        } finally {
+            setIsFetching(false);
         }
+
+        useEffect(() => {
+            getAdmin();
+        }, []);
     };
 };
