@@ -10,6 +10,10 @@ const EditProfile = () => {
 
     const [isProfile, setIsProfile] = useState<boolean>(true);
 
+    const toggleForm = () => {
+        setIsProfile(!isProfile);
+    };
+
     if (isFetching) {
         return (
             <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[535px] w-full">
@@ -42,10 +46,11 @@ const EditProfile = () => {
         <div className="flex flex-col bg-[#182237] my-3 p-5 rounded-lg text-sm min-h-[535px]">
             <button
                 type="button"
+                onClick={toggleForm}
                 className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md self-end">
                 {isProfile ? "Change Password" : "Edit Profile"}
             </button>
-            {isProfile ? <ProfileForm admin={admin} />  : <PasswordForm /> }
+            {isProfile ? <ProfileForm admin={admin} /> : <PasswordForm />}
         </div>
     );
 };
