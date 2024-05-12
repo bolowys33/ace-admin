@@ -26,10 +26,9 @@ const ProfileForm = () => {
         const token = localStorage.getItem("token");
 
         const formData = new FormData();
-        formData.append("username", inputData.username);
-        formData.append("email", inputData.email);
-        formData.append("firstname", inputData.firstname);
-        formData.append("lastname", inputData.lastname);
+        formData.append("currentPassword", inputData.currentPassword);
+        formData.append("newPassword", inputData.newPassword);
+        formData.append("confirmPassword", inputData.confirmPassword);
 
         try {
             const response = await axios.put("/api/admin", formData, {
@@ -82,11 +81,11 @@ const ProfileForm = () => {
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                     <InputField
-                        type="text"
+                        type="password"
                         label="Current Password *"
                         placeholder="Enter current password"
                         name="currentPassword"
-                        value={inputData.username}
+                        value={inputData.currentPassword}
                         required
                         onChange={handleChange}
                     />
@@ -95,25 +94,16 @@ const ProfileForm = () => {
                         label="Email *"
                         placeholder="Enter email address"
                         name="email"
-                        value={inputData.email}
+                        value={inputData.newPassword}
                         required
                         onChange={handleChange}
                     />
                     <InputField
                         type="text"
-                        label="First Name *"
-                        placeholder="Enter username"
+                        label="Confirm Password*"
+                        placeholder="Confirm password"
                         name="firstname"
-                        value={inputData.firstname}
-                        required
-                        onChange={handleChange}
-                    />
-                    <InputField
-                        type="text"
-                        label="Last Name *"
-                        placeholder="Enter lastname"
-                        name="lastname"
-                        value={inputData.lastname}
+                        value={inputData.confirmPassword}
                         required
                         onChange={handleChange}
                     />
