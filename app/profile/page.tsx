@@ -1,30 +1,18 @@
-"use client"
+"use client";
 
 import useAdmin from "@/hooks/useAdmin";
 import { Container } from "@mui/material";
-import { JWTVerifyResult, jwtVerify } from "jose";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-interface User {
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-}
 
 const ProfilePage = () => {
-    
-    const {} = useAdmin()
-    
+    const { admin, error, isFetching } = useAdmin();
 
     if (error) {
         return (
             <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[535px]">
                 <div className="grid place-items-center h-full">
                     <h3 className="text-xl">
-                        Error getting profile, check your network and try
-                        again.
+                        Error getting profile, check your network and try again.
                     </h3>
                 </div>
             </div>
@@ -41,30 +29,30 @@ const ProfilePage = () => {
             <h2 className="text-center font-bold text-3xl mt-5">My Profile</h2>
             <Container maxWidth="sm" className="bg-[#2e374a] rounded-md mt-8">
                 <div className="flex flex-col items-center space-y-4 mt-7 font-bold">
-                    {user && (
+                    {admin && (
                         <>
                             <div className="p-5 space-x-14">
                                 <span>Username: </span>
                                 <span className="border rounded-md py-2 px-5">
-                                    {user.username}
+                                    {admin.username}
                                 </span>
                             </div>
                             <div className="py-5 pl-16 space-x-6">
                                 <span>Email Address: </span>
                                 <span className="border rounded-md py-2 px-5">
-                                    {user.email}
+                                    {admin.email}
                                 </span>
                             </div>
                             <div className="p-5 space-x-14">
                                 <span>First Name: </span>
                                 <span className="border rounded-md py-2 px-5">
-                                    {user.firstName}
+                                    {admin.firstname}
                                 </span>
                             </div>
                             <div className="p-5 space-x-14">
                                 <span>Last Name: </span>
                                 <span className="border rounded-md py-2 px-5">
-                                    {user.lastName}
+                                    {admin.lastname}
                                 </span>
                             </div>
                         </>
