@@ -41,7 +41,7 @@ const EditProfile = () => {
             <button
                 type="button"
                 className="p-2 bg-[#5d57c9] hover:bg-[#39357e] text-white font-medium rounded-md self-end">
-                Edit profile
+                {isProfile ? "Change Password" : "Edit Profile"}
             </button>
         </div>
     );
