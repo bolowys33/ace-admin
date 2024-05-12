@@ -128,7 +128,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                                 ? "bg-gray-400 cursor-not-allowed"
                                 : "bg-[#5d57c9] hover:bg-[#39357e]"
                         }`}>
-                        {isloading ? "Loading" : "Sign-in"}
+                        {isloading ? "Loading" : "Update"}
                     </button>
                 </form>
             </Box>
