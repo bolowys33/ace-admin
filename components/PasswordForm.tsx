@@ -31,7 +31,7 @@ const ProfileForm = () => {
         formData.append("confirmPassword", inputData.confirmPassword);
 
         try {
-            const response = await axios.put("/api/admin", formData, {
+            const response = await axios.patch("/api/admin", formData, {
                 headers: {
                     Authorization: token,
                 },
