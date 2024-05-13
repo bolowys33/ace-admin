@@ -30,7 +30,7 @@ const RecoverPassword = ({ params }: { params: { token: string } }) => {
         setSuccess(false);
 
         const formData = new FormData();
-        formData.append("newPassword", inputData.newPassword);
+        formData.append("password", inputData.newPassword);
         formData.append("token", token);
 
         try {
@@ -46,8 +46,7 @@ const RecoverPassword = ({ params }: { params: { token: string } }) => {
 
             const response = await axios.post(
                 "/api/recover-password",
-                formData,
-                {}
+                formData
             );
 
             if (response.status === 200) {
