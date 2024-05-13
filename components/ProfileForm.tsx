@@ -86,7 +86,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
                     <InputField
                         type="text"
-                        label="Username *"
+                        label="Username"
                         placeholder={admin.username}
                         name="username"
                         value={inputData.username}
@@ -94,7 +94,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     />
                     <InputField
                         type="email"
-                        label="Email *"
+                        label="Email"
                         placeholder={admin.email}
                         name="email"
                         value={inputData.email}
@@ -102,7 +102,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     />
                     <InputField
                         type="text"
-                        label="First Name *"
+                        label="First Name"
                         placeholder={admin.firstname}
                         name="firstname"
                         value={inputData.firstname}
@@ -110,7 +110,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     />
                     <InputField
                         type="text"
-                        label="Last Name *"
+                        label="Last Name"
                         placeholder={admin.lastname}
                         name="lastname"
                         value={inputData.lastname}
