@@ -25,7 +25,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
         setError("");
         setSuccess(false);
 
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
 
         const formData = new FormData();
         formData.append("username", inputData.username);
@@ -36,8 +36,8 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
         try {
             const response = await axios.put("/api/admin", formData, {
                 headers: {
-                    Authorization: token
-                }
+                    Authorization: token,
+                },
             });
 
             if (response.status === 200) {
@@ -87,7 +87,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     <InputField
                         type="text"
                         label="Username *"
-                        placeholder="Enter username"
+                        placeholder={admin.username}
                         name="username"
                         value={inputData.username}
                         onChange={handleChange}
@@ -95,7 +95,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     <InputField
                         type="email"
                         label="Email *"
-                        placeholder="Enter email address"
+                        placeholder={admin.email}
                         name="email"
                         value={inputData.email}
                         onChange={handleChange}
@@ -103,7 +103,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     <InputField
                         type="text"
                         label="First Name *"
-                        placeholder="Enter username"
+                        placeholder={admin.firstname}
                         name="firstname"
                         value={inputData.firstname}
                         onChange={handleChange}
@@ -111,7 +111,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     <InputField
                         type="text"
                         label="Last Name *"
-                        placeholder="Enter lastname"
+                        placeholder={admin.lastname}
                         name="lastname"
                         value={inputData.lastname}
                         onChange={handleChange}
