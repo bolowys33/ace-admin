@@ -30,8 +30,14 @@ const PasswordForm = () => {
         formData.append("newPassword", inputData.newPassword);
 
         try {
+            if (inputData.newPassword.length < 8) {
+                setError("Password should be at least 8 characters");
+                return setTimeout(() => setError(""), 10000);
+            }
+
             if (inputData.newPassword !== inputData.confirmPassword) {
-                return setError("Password confirmation is incorrect");
+                setError("Password confirmation is incorrect");
+                return setTimeout(() => setError(""), 10000);
             }
 
             const response = await axios.patch("/api/admin", formData, {
