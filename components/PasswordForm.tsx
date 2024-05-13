@@ -25,15 +25,15 @@ const PasswordForm = () => {
 
         const token = localStorage.getItem("token");
 
-        if (inputData.newPassword !== inputData.confirmPassword) {
-            return setError("Password confirmation is incorrect");
-        }
-
         const formData = new FormData();
         formData.append("currentPassword", inputData.currentPassword);
         formData.append("newPassword", inputData.newPassword);
 
         try {
+            if (inputData.newPassword !== inputData.confirmPassword) {
+                return setError("Password confirmation is incorrect");
+            }
+
             const response = await axios.patch("/api/admin", formData, {
                 headers: {
                     Authorization: token,
