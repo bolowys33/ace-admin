@@ -3,7 +3,7 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const RecoverPassword = () => {
