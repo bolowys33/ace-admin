@@ -3,8 +3,11 @@ import InputField from "./InputField";
 import { Alert, Box, Container } from "@mui/material";
 import { Admin } from "@/hooks/useAdmin";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ProfileForm = ({ admin }: { admin: Admin }) => {
+    const router = useRouter()
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -48,8 +51,9 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                     firstname: "",
                     lastname: "",
                 });
+                setTimeout(()=> router.push("/profile"), 5000)
             } else {
-                setError(response.data.message);
+                setError(response.data.message); 
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
