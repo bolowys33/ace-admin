@@ -39,7 +39,7 @@ const RecoverPassword = () => {
                 return setTimeout(() => setError(""), 10000);
             }
 
-            const response = await axios.post("/api/admin", formData, {});
+            const response = await axios.post("/api/recover-password", formData, {});
 
             if (response.status === 200) {
                 setSuccess(true);
@@ -72,7 +72,7 @@ const RecoverPassword = () => {
         <Container maxWidth="xs" className="">
             <Box>
                 <h2 className="text-center font-bold text-3xl">
-                    Recover your password
+                    Reset your password
                 </h2>
                 <div className="text-center w-max mx-auto mt-8">
                     {error && <Alert severity="error">{error}</Alert>}
