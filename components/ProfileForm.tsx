@@ -90,7 +90,6 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                         placeholder="Enter username"
                         name="username"
                         value={inputData.username}
-                        required
                         onChange={handleChange}
                     />
                     <InputField
@@ -99,7 +98,6 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                         placeholder="Enter email address"
                         name="email"
                         value={inputData.email}
-                        required
                         onChange={handleChange}
                     />
                     <InputField
@@ -108,7 +106,6 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                         placeholder="Enter username"
                         name="firstname"
                         value={inputData.firstname}
-                        required
                         onChange={handleChange}
                     />
                     <InputField
@@ -117,7 +114,6 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
                         placeholder="Enter lastname"
                         name="lastname"
                         value={inputData.lastname}
-                        required
                         onChange={handleChange}
                     />
                     <button
