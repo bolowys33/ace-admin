@@ -6,7 +6,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
-const RecoverPassword = () => {
+const RecoverPassword = ({ params }: { params: { token: string } }) => {
+    const { token } = params;
+
     const router = useRouter();
 
     const [error, setError] = useState("");
@@ -29,6 +31,7 @@ const RecoverPassword = () => {
 
         const formData = new FormData();
         formData.append("newPassword", inputData.newPassword);
+        formData.append("token", token);
 
         try {
             if (inputData.newPassword.length < 8) {
