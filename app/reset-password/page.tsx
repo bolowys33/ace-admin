@@ -1,3 +1,5 @@
+"use client";
+
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
@@ -39,7 +41,11 @@ const RecoverPassword = () => {
                 return setTimeout(() => setError(""), 10000);
             }
 
-            const response = await axios.post("/api/recover-password", formData, {});
+            const response = await axios.post(
+                "/api/recover-password",
+                formData,
+                {}
+            );
 
             if (response.status === 200) {
                 setSuccess(true);
