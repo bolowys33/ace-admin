@@ -99,7 +99,7 @@ const PasswordForm = () => {
                         onChange={handleChange}
                     />
                     <InputField
-                        type="text"
+                        type="password"
                         label="Confirm Password*"
                         placeholder="Confirm password"
                         name="confirmPassword"
