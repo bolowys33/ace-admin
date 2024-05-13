@@ -69,7 +69,7 @@ const ForgotPassword = () => {
                     </div>
                     <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
+                        className="flex flex-col items-center md:w-[95%] mt-16 mx-auto">
                         <InputField
                             type="email"
                             label="Email*"
@@ -82,7 +82,7 @@ const ForgotPassword = () => {
                         <button
                             type="submit"
                             disabled={isloading}
-                            className={`py-2 px-5  text-white font-medium rounded-md ${
+                            className={`py-2 px-5  text-white font-medium rounded-md mt-8 ${
                                 isloading
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
