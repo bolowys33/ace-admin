@@ -47,8 +47,10 @@ const PasswordForm = () => {
                     newPassword: "",
                     confirmPassword: "",
                 });
+                setTimeout(() => setSuccess(""), 10000);
             } else {
                 setError(response.data.message);
+                setTimeout(() => setError(""), 10000);
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
