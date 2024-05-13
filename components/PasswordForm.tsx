@@ -2,8 +2,11 @@ import { ChangeEvent, useState } from "react";
 import InputField from "./InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const PasswordForm = () => {
+    const router = useRouter()
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -53,7 +56,7 @@ const PasswordForm = () => {
                     newPassword: "",
                     confirmPassword: "",
                 });
-                setTimeout(() => setSuccess(false), 10000);
+                setTimeout(()=> router.push("/profile"), 5000)
             } else {
                 setError(response.data.message);
                 setTimeout(() => setError(""), 10000);
