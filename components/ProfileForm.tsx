@@ -9,10 +9,10 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
     const [inputData, setInputData] = useState({
-        username: admin.username,
-        email: admin.email,
-        firstname: admin.firstname,
-        lastname: admin.lastname,
+        username: "",
+        email: "",
+        firstname: "",
+        lastname: "",
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
