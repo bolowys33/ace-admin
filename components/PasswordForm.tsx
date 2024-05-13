@@ -47,7 +47,7 @@ const PasswordForm = () => {
                     newPassword: "",
                     confirmPassword: "",
                 });
-                setTimeout(() => setSuccess(""), 10000);
+                setTimeout(() => setSuccess(false), 10000);
             } else {
                 setError(response.data.message);
                 setTimeout(() => setError(""), 10000);
