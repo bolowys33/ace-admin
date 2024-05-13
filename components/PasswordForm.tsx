@@ -90,10 +90,10 @@ const PasswordForm = () => {
                         onChange={handleChange}
                     />
                     <InputField
-                        type="email"
-                        label="Email *"
-                        placeholder="Enter email address"
-                        name="email"
+                        type="password"
+                        label="New Password *"
+                        placeholder="Enter new password"
+                        name="newPassword"
                         value={inputData.newPassword}
                         required
                         onChange={handleChange}
@@ -102,7 +102,7 @@ const PasswordForm = () => {
                         type="text"
                         label="Confirm Password*"
                         placeholder="Confirm password"
-                        name="firstname"
+                        name="confirmPassword"
                         value={inputData.confirmPassword}
                         required
                         onChange={handleChange}
