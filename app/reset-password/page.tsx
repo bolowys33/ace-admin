@@ -75,53 +75,55 @@ const RecoverPassword = () => {
     };
 
     return (
-        <Container maxWidth="xs" className="">
-            <Box>
-                <h2 className="text-center font-bold text-3xl">
-                    Reset your password
-                </h2>
-                <div className="text-center w-max mx-auto mt-8">
-                    {error && <Alert severity="error">{error}</Alert>}
-                    {success && (
-                        <Alert severity="success">
-                            Password updated successfully!
-                        </Alert>
-                    )}
-                </div>
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-3">
-                    <InputField
-                        type="password"
-                        label="New Password *"
-                        placeholder="Enter new password"
-                        name="newPassword"
-                        value={inputData.newPassword}
-                        required
-                        onChange={handleChange}
-                    />
-                    <InputField
-                        type="password"
-                        label="Confirm Password*"
-                        placeholder="Confirm password"
-                        name="confirmPassword"
-                        value={inputData.confirmPassword}
-                        required
-                        onChange={handleChange}
-                    />
-                    <button
-                        type="submit"
-                        disabled={isloading}
-                        className={`py-2 px-5  text-white font-medium rounded-md ${
-                            isloading
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-[#5d57c9] hover:bg-[#39357e]"
-                        }`}>
-                        {isloading ? "Loading" : "Update"}
-                    </button>
-                </form>
-            </Box>
-        </Container>
+        <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
+            <Container maxWidth="xs" className="">
+                <Box>
+                    <h2 className="text-center font-bold text-3xl">
+                        Reset your password
+                    </h2>
+                    <div className="text-center w-max mx-auto mt-8">
+                        {error && <Alert severity="error">{error}</Alert>}
+                        {success && (
+                            <Alert severity="success">
+                                Password updated successfully!
+                            </Alert>
+                        )}
+                    </div>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col items-center md:w-[95%] mt-10 mx-auto space-y-5">
+                        <InputField
+                            type="password"
+                            label="New Password *"
+                            placeholder="Enter new password"
+                            name="newPassword"
+                            value={inputData.newPassword}
+                            required
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            type="password"
+                            label="Confirm Password*"
+                            placeholder="Confirm password"
+                            name="confirmPassword"
+                            value={inputData.confirmPassword}
+                            required
+                            onChange={handleChange}
+                        />
+                        <button
+                            type="submit"
+                            disabled={isloading}
+                            className={`py-2 px-5  text-white font-medium rounded-md ${
+                                isloading
+                                    ? "bg-gray-400 cursor-not-allowed"
+                                    : "bg-[#5d57c9] hover:bg-[#39357e]"
+                            }`}>
+                            {isloading ? "Loading" : "Reset"}
+                        </button>
+                    </form>
+                </Box>
+            </Container>
+        </div>
     );
 };
 
