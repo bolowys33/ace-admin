@@ -28,7 +28,6 @@ const PasswordForm = () => {
         const formData = new FormData();
         formData.append("currentPassword", inputData.currentPassword);
         formData.append("newPassword", inputData.newPassword);
-        formData.append("confirmPassword", inputData.confirmPassword);
 
         try {
             const response = await axios.patch("/api/admin", formData, {
