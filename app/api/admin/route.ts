@@ -267,7 +267,20 @@ export async function PATCH(req: Request): Promise<Response> {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Invalid current password.",
+                    message: "Incorrect current password.",
+                },
+                { status: 400 }
+            );
+        }
+
+        //Check if the new password is the same as current password
+        const isSameAsNew = await bcrypt.compare(newPassword, admin.password);
+        if (isSameAsNew) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message:
+                        "Choose a new password different from the current password.",
                 },
                 { status: 400 }
             );

@@ -5,7 +5,7 @@ interface InputProps {
     name: string;
     value?: string;
     label: string;
-    required: boolean;
+    required?: boolean;
     type: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
 }
