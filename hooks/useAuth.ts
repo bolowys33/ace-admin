@@ -3,46 +3,55 @@ import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
 interface DecodedToken {
-    id: string;
-    username: string;
-    email: string;
-    firstname: string;
-    lastname: string;
-    exp: number;
+  id: string;
+  username: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  exp: number;
 }
 
 const useAuthorization = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            // If no token is present, redirect to the login page
-            router.push("/login");
-            return;
+  useEffect(() => {
+    const validateToken = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        router.push("/login");
+        return;
+      }
+
+      try {
+        const decodedToken = jwtDecode<DecodedToken>(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decodedToken.exp < currentTime) {
+          setIsAuthenticated(false);
+          setIsLoading(false);
+          router.push("/login");
+          return;
         }
 
-        try {
-            const decodedToken = jwtDecode<DecodedToken>(token);
-            const currentTime = Date.now() / 1000;
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        router.push("/login");
+      }
+    };
 
-            if (decodedToken.exp < currentTime) {
-                // If token is expired, redirect to login page
-                router.push("/login");
-                return;
-            }
+    validateToken();
+  }, [router]);
 
-            // Set authentication state to true
-            setIsAuthenticated(true);
-        } catch (error) {
-            // Handle any decoding errors
-            console.error("Error decoding token:", error);
-            router.push("/login");
-        }
-    }, []);
-
-    return isAuthenticated;
+  return { isAuthenticated, isLoading };
 };
 
 export default useAuthorization;

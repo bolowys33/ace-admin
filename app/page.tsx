@@ -5,18 +5,18 @@ import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
 import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 
 const Dashboard = () => {
-    const isAuthenticated = useAuthorization();
-    const router = useRouter();
+    const { isAuthenticated, isLoading } = useAuthorization();
+  const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
-        router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
-    }
+  if (!isAuthenticated && !isLoading) {
+    router.push("/login");
+    return null;
+  }
 
     return (
         <div className="mt-3">
