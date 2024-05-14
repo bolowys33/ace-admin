@@ -20,7 +20,9 @@ const Sidebar = () => {
     return (
         <div>
             <div className="mt-3 space-y-4 pr-8">
-                <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
+                {pathname !== "/login" && (
+                    <div>
+                        <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/"}>
                         <SpaceDashboardRounded /> Dashboard
                     </Link>
@@ -45,16 +47,20 @@ const Sidebar = () => {
                         </li>
                     ))}
                 </ul>
+                    </div>
+                )}
                 <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/login' ? "bg-[#2e374a]" : ""}`}>
                     <Link href={"/login"}>
                         <LoginRounded /> Sign-in
                     </Link>
                 </div>
-                <div className={`hover:bg-[#2e374a] p-3 rounded-md ${pathname === '/' ? "bg-[#2e374a]" : ""}`}>
+                {pathname === "/login" && (
+                    <div className={`hover:bg-[#2e374a] p-3 rounded-md `}>
                     <Link href={"/"}>
                         <LogoutRounded /> Sign-out
                     </Link>
                 </div>
+                ) }
             </div>
         </div>
     );
