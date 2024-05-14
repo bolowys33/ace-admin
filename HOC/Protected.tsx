@@ -1,5 +1,5 @@
 "use client"
-
+import React from "react"
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,7 @@ interface DecodedToken {
     exp: number;
 }
 
-const ProtectedRoute = (WrappedComponent: React.ComponentType) => {
+const ProtectedRoute = (WrappedComponent: any) => {
     const router = useRouter();
     const token = localStorage.getItem("token");
 
