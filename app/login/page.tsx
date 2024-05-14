@@ -3,9 +3,12 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
 const Login = () => {
+    const router = useRouter()
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -39,6 +42,7 @@ const Login = () => {
                     username: "",
                     password: "",
                 });
+                setTimeout(() => router.back(), 4000)
             } else {
                 setError(response.data.message);
             }
