@@ -3,9 +3,20 @@
 import PasswordForm from "@/components/PasswordForm";
 import ProfileForm from "@/components/ProfileForm";
 import useAdmin from "@/hooks/useAdmin";
+import useAuthorization from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const EditProfile = () => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const { admin, error, isFetching } = useAdmin();
 
     const [isProfile, setIsProfile] = useState<boolean>(true);
