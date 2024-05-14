@@ -1,10 +1,8 @@
-
-import ProtectedRoute from "@/HOC/Protected";
 import Card from "@/components/Card";
 import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
     return (
         <div className="mt-3">
             <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-5">
@@ -13,9 +11,9 @@ const Dashboard: React.FC = () => {
                 <Card title="Monthly Impressions" count={500} details="50% compare to last month" />
             </div>
             <ImpressionChart />
-            <RecentComments />a
+            <RecentComments />
         </div>
     );
 };
 
-export default ProtectedRoute(Dashboard);
+export default Dashboard;
