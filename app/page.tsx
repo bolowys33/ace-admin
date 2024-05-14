@@ -1,3 +1,4 @@
+import ProtectedRoute from "@/HOC/Protected";
 import Card from "@/components/Card";
 import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
@@ -16,4 +17,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default ProtectedRoute(Dashboard);
