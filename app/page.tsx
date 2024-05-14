@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
     return (
         <div className="mt-3">
             <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-5">
@@ -12,7 +12,7 @@ const Dashboard = () => {
                 <Card title="Monthly Impressions" count={500} details="50% compare to last month" />
             </div>
             <ImpressionChart />
-            <RecentComments />
+            <RecentComments />a
         </div>
     );
 };
