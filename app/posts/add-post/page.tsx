@@ -7,8 +7,19 @@ import { ChangeEvent, useRef, useState } from "react";
 import "./jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
+import useAuthorization from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 const AddPost = () => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
