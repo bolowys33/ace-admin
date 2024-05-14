@@ -41,14 +41,4 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     }
 };
 
-// Helper function to check user permissions based on the decoded token
-const checkUserPermission = (decodedToken: DecodedToken): boolean => {
-    // Implement your logic to check user permissions or roles here
-    // You can access the user data and roles from the decoded token
-    // For example:
-    const userRole = decodedToken.username; // Assuming the role is stored in the 'username' field
-    const requiredRole = "admin";
-    return userRole === requiredRole;
-};
-
 export default ProtectedRoute;
