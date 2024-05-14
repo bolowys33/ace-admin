@@ -7,6 +7,7 @@ interface DecodedToken {
     email: string;
     firstname: string;
     lastname: string;
+    exp: number
 }
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -29,13 +30,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
             // If the token is expired, redirect to the login page
             router.push("/login");
             return null;
-        }
-
-        // Check user permissions or roles here
-        const hasPermission = checkUserPermission(decodedToken);
-        if (!hasPermission) {
-            // If the user is not authorized, redirect or display an error message
-            return <div>You are not authorized to access this page.</div>;
         }
 
         // If the user is authorized, render the children components
