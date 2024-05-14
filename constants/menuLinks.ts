@@ -64,7 +64,7 @@ const MENU_LINKS: MenuLinks[] = [
             },
             {
                 title: "Edit Profile",
-                path: "/edit-account",
+                path: "profile/edit-profile",
                 icon: React.createElement(Groups2Rounded),
             },
         ],
