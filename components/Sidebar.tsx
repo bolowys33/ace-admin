@@ -11,13 +11,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const Sidebar = () => {
-    const router = useRouter()
+    const router = useRouter();
     const pathname = usePathname();
 
     const handleLogout = () => {
-        localStorage.removeItem("token")
-        router.push("/login")
-    }
+        localStorage.removeItem("token");
+        router.push("/login");
+    };
 
     return (
         <div>
@@ -72,8 +72,9 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 {pathname !== "/login" && (
-                    <div className={`bg-[#cc3636] hover:bg-[#582121] p-3 rounded-md cursor-pointer`}>
-                        <button type="button">
+                    <div
+                        className={`bg-[#cc3636] hover:bg-[#582121] p-3 rounded-md cursor-pointer`}>
+                        <button type="button" onClick={handleLogout}>
                             <LogoutRounded /> Sign-out
                         </button>
                     </div>
