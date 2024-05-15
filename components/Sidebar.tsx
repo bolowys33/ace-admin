@@ -42,7 +42,7 @@ const Sidebar = () => {
                                             (link, linkIndex) => (
                                                 <li
                                                     key={`${index}-${linkIndex}`}
-                                                    className={`ml-5 my-1 p-[10px] rounded-md ${
+                                                    className={`hover:bg-[#2e374a] ml-5 my-1 p-[10px] rounded-md ${
                                                         pathname === link.path
                                                             ? "bg-[#2e374a]"
                                                             : ""
