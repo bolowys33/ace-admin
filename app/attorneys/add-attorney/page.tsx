@@ -87,7 +87,7 @@ const AddAtorney = () => {
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="sm" className="">
+            <Container maxWidth="xs" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
                         Create Attorney details
