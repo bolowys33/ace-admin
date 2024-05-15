@@ -8,8 +8,19 @@ import "@/app/posts/add-post/jodit-custom.css"; // Import your custom CSS file
 import DOMPurify from "dompurify";
 import axios from "axios";
 import useSinglePost from "@/hooks/useSinglePost";
+import useAuthorization from "@/hooks/useAuth";
+import { useRouter } from "next/router";
 
 const UpdatePost = ({ params }: { params: { url: string } }) => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const { url } = params;
     const { post, error, isFetching } = useSinglePost(url);
 

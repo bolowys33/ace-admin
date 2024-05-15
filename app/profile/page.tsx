@@ -1,10 +1,21 @@
 "use client";
 
 import useAdmin from "@/hooks/useAdmin";
+import useAuthorization from "@/hooks/useAuth";
 import { Container } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const { admin, error, isFetching } = useAdmin();
 
     if (isFetching) {

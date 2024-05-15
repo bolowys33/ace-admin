@@ -1,12 +1,23 @@
 "use client";
 
 import InputField from "@/components/InputField";
+import useAuthorization from "@/hooks/useAuth";
 import useSingleAttorney from "@/hooks/useSingleAttorney";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const EditAttorney = ({ params }: { params: { id: string } }) => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const { id } = params;
 
     const { attorney, isFetching, error } = useSingleAttorney(id);

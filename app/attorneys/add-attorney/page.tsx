@@ -1,11 +1,22 @@
 "use client";
 
 import InputField from "@/components/InputField";
+import useAuthorization from "@/hooks/useAuth";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
+    const isAuthenticated = useAuthorization();
+    const router = useRouter();
+
+    if (!isAuthenticated) {
+        // Redirect to the login page
+        router.push("/login");
+        return null; // Optionally, render a loading indicator while redirecting
+    }
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
