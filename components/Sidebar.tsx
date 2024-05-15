@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import MENU_LINKS from "@/constants/menuLinks";
 import {
     SpaceDashboardRounded,
-    ExpandMore,
-    ExpandLess,
     LogoutRounded,
     LoginRounded,
 } from "@mui/icons-material";
