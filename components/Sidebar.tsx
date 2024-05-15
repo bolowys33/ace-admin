@@ -8,10 +8,16 @@ import {
     LoginRounded,
 } from "@mui/icons-material";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Sidebar = () => {
+    const router = useRouter()
     const pathname = usePathname();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        router.push("/login")
+    }
 
     return (
         <div>
