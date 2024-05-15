@@ -12,7 +12,7 @@ import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 
 const UpdatePost = ({ params }: { params: { url: string } }) => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {

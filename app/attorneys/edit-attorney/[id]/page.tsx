@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const EditAttorney = ({ params }: { params: { id: string } }) => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {

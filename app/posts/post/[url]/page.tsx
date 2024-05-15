@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const SinglePost = lazy(() => import("@/components/SinglePost"));
 
 const PostPage = ({ params }: { params: { url: string } }) => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {

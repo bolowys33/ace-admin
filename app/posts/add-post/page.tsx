@@ -11,7 +11,7 @@ import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 const AddPost = () => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {

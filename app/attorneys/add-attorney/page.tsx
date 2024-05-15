@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {

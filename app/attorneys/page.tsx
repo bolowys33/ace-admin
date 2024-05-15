@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const Attorneys = lazy(() => import("@/components/Attorneys"));
 
 const AttorneysPage = () => {
-    const {isAuthenticated, isLoading} = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
     if (!isAuthenticated && !isLoading) {
