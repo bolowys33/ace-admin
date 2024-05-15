@@ -9,13 +9,12 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const EditAttorney = ({ params }: { params: { id: string } }) => {
-    const isAuthenticated = useAuthorization();
+    const {isAuthenticated, isLoading} = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
+    if (!isAuthenticated && !isLoading) {
         router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
+        return null;
     }
 
     const { id } = params;
