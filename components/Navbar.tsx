@@ -1,11 +1,10 @@
-"use client";
+
 
 import { SearchRounded } from "@mui/icons-material";
 import { usePathname } from "next/navigation";
 import SidebarHeader from "./SidebarHeader";
 
 const Navbar = () => {
-    const pathname = usePathname();
 
     return (
         <div className="flex items-center justify-end w-full md:w-4/5 fixed p-5 bg-[#182237] z-50">
