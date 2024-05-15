@@ -66,7 +66,7 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 {pathname !== "/login" && (
-                    <div className={`hover:bg-[#2e374a] p-3 rounded-md `}>
+                    <div className={`bg-[red] p-3 rounded-md `}>
                         <button type="button">
                             <LogoutRounded /> Sign-out
                         </button>
