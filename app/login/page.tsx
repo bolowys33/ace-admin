@@ -1,13 +1,17 @@
 "use client";
 
 import InputField from "@/components/InputField";
+import useAuthorization from "@/hooks/useAuth";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
 const Login = () => {
-    const router = useRouter()
+    const router = useRouter();
+    const { isAuthenticated } = useAuthorization();
+
+    if (isAuthenticated) router.push("/dashboard");
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
@@ -42,7 +46,7 @@ const Login = () => {
                     username: "",
                     password: "",
                 });
-                setTimeout(() => router.back(), 4000)
+                setTimeout(() => router.back(), 4000);
             } else {
                 setError(response.data.message);
             }
@@ -64,7 +68,7 @@ const Login = () => {
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="sm" className="">
+            <Container maxWidth="xs" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
                         Sign-in your account

@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 const Posts = lazy(() => import("@/components/Posts"));
 
 const PostsPage = () => {
-    const isAuthenticated = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
+    if (!isAuthenticated && !isLoading) {
         router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
+        return null;
     }
 
     return (

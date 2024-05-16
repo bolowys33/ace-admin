@@ -72,7 +72,7 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
     };
 
     return (
-        <Container maxWidth="sm" className="">
+        <Container maxWidth="xs" className="">
             <Box>
                 <h2 className="text-center font-bold text-3xl">
                     Edit your Account

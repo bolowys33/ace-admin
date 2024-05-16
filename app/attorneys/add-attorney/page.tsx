@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const AddAtorney = () => {
-    const isAuthenticated = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
+    if (!isAuthenticated && !isLoading) {
         router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
+        return null;
     }
 
     const [error, setError] = useState("");
@@ -88,7 +87,7 @@ const AddAtorney = () => {
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
-            <Container maxWidth="sm" className="">
+            <Container maxWidth="xs" className="">
                 <Box>
                     <h2 className="text-center font-bold text-3xl">
                         Create Attorney details

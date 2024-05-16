@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const EditProfile = () => {
-    const isAuthenticated = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
+    if (!isAuthenticated && !isLoading) {
         router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
+        return null;
     }
 
     const { admin, error, isFetching } = useAdmin();

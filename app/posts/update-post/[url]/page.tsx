@@ -12,13 +12,12 @@ import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 
 const UpdatePost = ({ params }: { params: { url: string } }) => {
-    const isAuthenticated = useAuthorization();
+    const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated) {
-        // Redirect to the login page
+    if (!isAuthenticated && !isLoading) {
         router.push("/login");
-        return null; // Optionally, render a loading indicator while redirecting
+        return null;
     }
 
     const { url } = params;
