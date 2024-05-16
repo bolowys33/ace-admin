@@ -22,7 +22,7 @@ export default function RootLayout({
               <Sidebar />
             </div>
           )}
-          <div className="w-full md:w-4/5">
+          <div className={`w-full ${pathname !== "/login" ? "md:w-4/5" : "md:w-full"} `}>
             <Navbar />
             <div className="mt-[98px] px-3">{children}</div>
           </div>
