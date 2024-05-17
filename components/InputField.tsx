@@ -1,4 +1,4 @@
-import { Visibility } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ChangeEventHandler, useState } from "react";
 
 interface InputProps {
@@ -33,7 +33,7 @@ const InputField = ({
             <label htmlFor={name} className="ml-3">
                 {label}
             </label>
-            <div className="flex gap-3 bg-[#2e374a] rounded-lg p-2">
+            <div className="flex items-center gap-3 bg-[#2e374a] rounded-lg p-2">
                 <input
                     type={visibility ? "text" : type}
                     name={name}
@@ -44,7 +44,13 @@ const InputField = ({
                     onChange={onChange}
                     className="bg-transparent border-none outline-none pl-2 w-full"
                 />
-                {show && <Visibility className="cursor-pointer" />}
+                {type === "password" && (
+                    <div
+                        className="cursor-pointer transition-all ease-in-out duration-300"
+                        onClick={handleVisibility}>
+                        {visibility ? <VisibilityOff /> : <Visibility />}
+                    </div>
+                )}
             </div>
         </div>
     );
