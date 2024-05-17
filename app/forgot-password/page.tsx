@@ -3,6 +3,7 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 const ForgotPassword = () => {
@@ -79,6 +80,7 @@ const ForgotPassword = () => {
                             required
                             onChange={handleChange}
                         />
+                        <Link href={"/forgot-password"} className="text-[red]">Know your password? Sign-in instead</Link>
                         <button
                             type="submit"
                             disabled={isloading}

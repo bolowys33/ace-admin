@@ -101,7 +101,6 @@ const Login = () => {
                             name="password"
                             value={inputData.password}
                             required
-                            show
                             onChange={handleChange}
                         />
                         <Link href={"/forgot-password"} className="text-[red]">Forgot Password?</Link>
