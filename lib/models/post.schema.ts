@@ -13,6 +13,12 @@ export const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Admin",
     },
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Comment",
+        },
+    ],
     post_url: {
         type: String,
         required: [true, "URL is required"],

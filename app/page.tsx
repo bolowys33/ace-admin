@@ -5,7 +5,6 @@ import ImpressionChart from "@/components/ImpressionChart";
 import RecentComments from "@/components/RecentComments";
 import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const Dashboard = () => {
     const { isAuthenticated, isLoading } = useAuthorization();

@@ -1,15 +1,18 @@
 "use client";
 
 import InputField from "@/components/InputField";
+import useToken from "@/hooks/useToken";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 const RecoverPassword = ({ params }: { params: { token: string } }) => {
     const { token } = params;
-
     const router = useRouter();
+
+    const { active, isFetching } = useToken(token);
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
@@ -62,6 +65,13 @@ const RecoverPassword = ({ params }: { params: { token: string } }) => {
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
+                if (error.response?.data.message === "Token is expired") {
+                    setError("Recovery link expired, generate a new link");
+                    return setTimeout(
+                        () => router.push("/forgot-password"),
+                        5000
+                    );
+                }
                 setError(
                     error.response?.data.message ||
                         "Error changing password, try again"
@@ -75,6 +85,32 @@ const RecoverPassword = ({ params }: { params: { token: string } }) => {
             setIsLoading(false);
         }
     };
+
+    if (isFetching) {
+        return (
+            <div className="grid bg-[#182237] my-3 p-5 rounded-lg h-[535px] w-full">
+                <h3 className="place-self-center text-xl">Loading...</h3>
+            </div>
+        );
+    }
+
+    if (!isFetching && !active) {
+        return (
+            <div className="bg-[#182237] my-3 p-5 rounded-lg text-sm h-[535px]">
+                <div className="grid place-items-center h-full">
+                    <h3 className="text-xl">
+                        Link expired, click{" "}
+                        <Link
+                            href="/forgot-password"
+                            className="underline text-blue-500">
+                            here
+                        </Link>{" "}
+                        to generate a new link.
+                    </h3>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="bg-[#182237] rounded-lg py-7 min-h-[520px] mt-20">
