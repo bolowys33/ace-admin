@@ -10,7 +10,17 @@ export async function GET(): Promise<Response> {
             .select("-__v")
             .populate({ path: "post_id", select: "title" });
 
-        return NextResponse.json({ success: true, data: comments });
+        if (comments.length === 0) {
+            return NextResponse.json(
+                { success: true, message: "No comment found" },
+                { status: 200 }
+            );
+        }
+
+        return NextResponse.json(
+            { success: true, data: comments },
+            { status: 200 }
+        );
     } catch (error) {
         return NextResponse.json(
             {
