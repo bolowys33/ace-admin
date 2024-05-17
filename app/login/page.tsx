@@ -100,6 +100,7 @@ const Login = () => {
                             name="password"
                             value={inputData.password}
                             required
+                            show
                             onChange={handleChange}
                         />
                         <button
