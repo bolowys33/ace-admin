@@ -29,7 +29,11 @@ export async function POST(req: Request): Promise<Response> {
     try {
         await connectDB();
 
-        const { author, body, postId } = await req.json();
+        const formData = await req.formData();
+        const author = formData.get('author') as string;
+        const body = formData.get('body') as string;
+        const postId = formData.get('postId') as string;
+
         if (!author || !body || !postId) {
             return NextResponse.json(
                 {
@@ -61,3 +65,4 @@ export async function POST(req: Request): Promise<Response> {
         );
     }
 }
+
