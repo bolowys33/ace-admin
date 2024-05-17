@@ -1,11 +1,7 @@
 "use client";
 import React from "react";
 import MENU_LINKS from "@/constants/menuLinks";
-import {
-    SpaceDashboardRounded,
-    LogoutRounded,
-    LoginRounded,
-} from "@mui/icons-material";
+import { SpaceDashboardRounded, LogoutRounded } from "@mui/icons-material";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
