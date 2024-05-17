@@ -5,11 +5,12 @@ import SidebarHeader from "./SidebarHeader";
 
 const Navbar = () => {
     const pathname = usePathname();
+    const excludedPaths = ["/login", "/forgot-password", "/reset-password"];
 
-    return (    
+    return (
         <div
             className={`flex items-center justify-end w-full ${
-                !["/login", "/forgot-password"].includes(pathname)
+                !excludedPaths.some((path) => pathname.startsWith(path))
                     ? "md:w-4/5"
                     : "md:w-full"
             } fixed p-5 bg-[#182237] z-50`}>

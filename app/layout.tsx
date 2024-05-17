@@ -7,6 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
+const excludedPaths = ["/login", "/forgot-password", "/reset-password"];
 
 export default function RootLayout({
     children,
@@ -17,14 +18,18 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <div className="flex">
-                    {!["/login", "/forgot-password"].includes(pathname) && (
+                    {!excludedPaths.some((path) =>
+                        pathname.startsWith(path)
+                    ) && (
                         <div className="hidden md:block w-1/5 h-screen bg-[#182237] pl-5 py-3 sticky top-0">
                             <Sidebar />
                         </div>
                     )}
                     <div
                         className={`w-full ${
-                            !["/login", "/forgot-password"].includes(pathname)
+                            !excludedPaths.some((path) =>
+                                pathname.startsWith(path)
+                            )
                                 ? "md:w-4/5"
                                 : "md:w-full"
                         } `}>
