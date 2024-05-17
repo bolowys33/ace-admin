@@ -88,8 +88,8 @@ export async function GET(req: Request): Promise<Response> {
     try {
         await connectDB();
 
-        const formData = await req.formData();
-        const token = formData.get("token");
+        
+        const token = req.headers.get('X-Recovery-Token');
         if (!token) {
             return NextResponse.json(
                 { success: false, message: "Please provide token" },
