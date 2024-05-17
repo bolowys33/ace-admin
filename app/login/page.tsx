@@ -104,7 +104,7 @@ const Login = () => {
                             show
                             onChange={handleChange}
                         />
-                        <Link href={"/forgot-password"}>Forgot Password?</Link>
+                        <Link href={"/forgot-password"} className="text-[red]">Forgot Password?</Link>
                         <button
                             type="submit"
                             disabled={isloading}
