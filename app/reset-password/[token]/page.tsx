@@ -62,6 +62,13 @@ const RecoverPassword = ({ params }: { params: { token: string } }) => {
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
+                if (error.response?.data.message === "Token is expired") {
+                    setError("Recovery link expired, generate a new link");
+                    return setTimeout(
+                        () => router.push("/forgot-password"),
+                        5000
+                    );
+                }
                 setError(
                     error.response?.data.message ||
                         "Error changing password, try again"
