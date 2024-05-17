@@ -25,9 +25,7 @@ const InputField = ({
     const [visibility, setVisibility] = useState(false);
 
     const handleVisibility = () => {
-        if (type == "password") {
-            setVisibility((prevState) => !prevState);
-        }
+        setVisibility((prevState) => !prevState);
     };
 
     return (
