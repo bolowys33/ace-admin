@@ -12,7 +12,7 @@ export async function GET(): Promise<Response> {
 
         if (comments.length === 0) {
             return NextResponse.json(
-                { success: true, message: "No comment found" },
+                { success: false, message: "No comment found" },
                 { status: 200 }
             );
         }
