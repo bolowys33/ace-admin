@@ -8,7 +8,6 @@ interface InputProps {
     label: string;
     required?: boolean;
     type: string;
-    show?: boolean;
     onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -18,7 +17,6 @@ const InputField = ({
     label,
     required,
     type,
-    show,
     value,
     onChange,
 }: InputProps) => {
