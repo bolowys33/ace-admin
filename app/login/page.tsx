@@ -4,6 +4,7 @@ import InputField from "@/components/InputField";
 import useAuthorization from "@/hooks/useAuth";
 import { Alert, Box, Container } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
@@ -103,6 +104,7 @@ const Login = () => {
                             show
                             onChange={handleChange}
                         />
+                        <Link href={"/forgot-password"}>Forgot Password?</Link>
                         <button
                             type="submit"
                             disabled={isloading}
