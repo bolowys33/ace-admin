@@ -1,3 +1,4 @@
+import { Visibility } from "@mui/icons-material";
 import { ChangeEventHandler } from "react";
 
 interface InputProps {
@@ -7,6 +8,7 @@ interface InputProps {
     label: string;
     required?: boolean;
     type: string;
+    show?: boolean;
     onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -16,6 +18,7 @@ const InputField = ({
     label,
     required,
     type,
+    show,
     value,
     onChange,
 }: InputProps) => {
@@ -24,7 +27,7 @@ const InputField = ({
             <label htmlFor={name} className="ml-3">
                 {label}
             </label>
-            <div className=" bg-[#2e374a] rounded-lg p-2">
+            <div className="flex gap-3 bg-[#2e374a] rounded-lg p-2">
                 <input
                     type={type}
                     name={name}
@@ -35,6 +38,7 @@ const InputField = ({
                     onChange={onChange}
                     className="bg-transparent border-none outline-none pl-2 w-full"
                 />
+                {show && <Visibility />}
             </div>
         </div>
     );
