@@ -18,7 +18,10 @@ export async function GET(
             );
         }
 
-        return NextResponse.json({ success: true, data: comment });
+        return NextResponse.json(
+            { success: true, data: comment },
+            { status: 200 }
+        );
     } catch (error) {
         return NextResponse.json(
             {
@@ -53,7 +56,7 @@ export async function DELETE(
 
         return NextResponse.json(
             { success: true, message: "Comment deleted" },
-            { status: 404 }
+            { status: 200 }
         );
     } catch (error) {
         return NextResponse.json(
