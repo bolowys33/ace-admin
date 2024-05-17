@@ -18,7 +18,8 @@ export async function GET(
 
         const post = await Post.findOne({ post_url: url })
             .select("-__v")
-            .populate({ path: "author", select: "firstname lastname" });
+            .populate({ path: "author", select: "firstname lastname" })
+            .populate({ path: "comments", select: "-__v" });
         if (!post) {
             return NextResponse.json(
                 { success: false, message: "Post not found" },
@@ -174,7 +175,7 @@ export async function DELETE(
             );
         }
 
-        await Post.deleteOne({post_url: url});
+        await Post.deleteOne({ post_url: url });
         return NextResponse.json(
             { success: true, message: "Post deleted successfully" },
             { status: 200 }
