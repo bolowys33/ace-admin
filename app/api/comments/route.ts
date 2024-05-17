@@ -30,9 +30,9 @@ export async function POST(req: Request): Promise<Response> {
         await connectDB();
 
         const formData = await req.formData();
-        const author = formData.get('author') as string;
-        const body = formData.get('body') as string;
-        const postId = formData.get('postId') as string;
+        const author = formData.get("author") as string;
+        const body = formData.get("body") as string;
+        const postId = formData.get("postId") as string;
 
         if (!author || !body || !postId) {
             return NextResponse.json(
@@ -51,7 +51,10 @@ export async function POST(req: Request): Promise<Response> {
             $push: { comments: savedComment._id },
         });
 
-        return NextResponse.json({ success: true, data: savedComment });
+        return NextResponse.json(
+            { success: true, data: savedComment },
+            { status: 201 }
+        );
     } catch (error) {
         return NextResponse.json(
             {
@@ -65,4 +68,3 @@ export async function POST(req: Request): Promise<Response> {
         );
     }
 }
-
