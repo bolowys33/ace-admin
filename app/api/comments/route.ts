@@ -8,7 +8,7 @@ export async function GET(): Promise<Response> {
 
         const comments = await Comment.find()
             .select("-__v")
-            .populate({ path: "post_id", select: "title" });
+            .populate({ path: "post", select: "title" });
 
         if (comments.length === 0) {
             return NextResponse.json(
