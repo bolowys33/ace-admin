@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios, { AxiosResponse } from "axios";
 
 interface Comment {
     _id: string;
@@ -23,16 +24,20 @@ const useComment = () => {
         setCommentError(null);
 
         try {
-            const response = await fetch("/api/comments");
-            const data = await response.json();
-
-            if (data.success) {
-                setComments(data.data);
+            const response: AxiosResponse<CommentResponse> = await axios.get(
+                "/api/comments"
+            );
+            if (response.data.success) {
+                setComments(response.data.data);
             } else {
-                setCommentError(data.message);
+                setCommentError(response.data.message);
             }
         } catch (error) {
-            setCommentError("An error occurred while fetching comments.");
+            if (axios.isAxiosError(error)) {
+                setCommentError(error.message);
+            } else {
+                setCommentError("An error occurred while fetching comments.");
+            }
         } finally {
             setCommentLoading(false);
         }
