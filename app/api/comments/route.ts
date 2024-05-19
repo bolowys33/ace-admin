@@ -42,9 +42,9 @@ export async function POST(req: Request): Promise<Response> {
         const formData = await req.formData();
         const author = formData.get("author") as string;
         const body = formData.get("body") as string;
-        const postId = formData.get("postId") as string;
+        const post = formData.get("postId") as string;
 
-        if (!author || !body || !postId) {
+        if (!author || !body || !post) {
             return NextResponse.json(
                 {
                     success: false,
@@ -54,10 +54,10 @@ export async function POST(req: Request): Promise<Response> {
             );
         }
 
-        const newComment = new Comment({ author, body });
+        const newComment = new Comment({ author, body, post });
         const savedComment = await newComment.save();
 
-        await Post.findByIdAndUpdate(postId, {
+        await Post.findByIdAndUpdate(post, {
             $push: { comments: savedComment._id },
         });
 
