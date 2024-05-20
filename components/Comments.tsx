@@ -1,5 +1,15 @@
 import { Container } from "@mui/material";
 
+interface Comment {
+    author: string;
+    body: string;
+    date_created: string;
+}
+
+interface CommentProps {
+    comments: Comment[];
+}
+
 const Comments = () => {
     const comments = [
         {
@@ -19,21 +29,29 @@ const Comments = () => {
     return (
         <Container maxWidth="sm" className="mt-14">
             <h2 className="text-xl font-bold mb-4 text-center">Comments</h2>
-            <div className="space-y-4">
-                {comments.map((comment) => (
-                    <div
-                        key={comment.id}
-                        className="bg-[#2e374a] p-4 rounded-md">
-                        <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-bold text-[#b7bac1]">{comment.author}</h3>
-                            <p className="text-[#b7bac1] text-sm">
-                                {new Date(comment.date).toLocaleString()}
-                            </p>
+            {comments.length === 0 ? (
+                <div className="grid place-items-center text-red-500 h-[250px]">
+                    No comment found
+                </div>
+            ) : (
+                <div className="space-y-4">
+                    {comments.map((comment) => (
+                        <div
+                            key={comment.id}
+                            className="bg-[#2e374a] p-4 rounded-md">
+                            <div className="flex items-center justify-between mb-2">
+                                <h3 className="font-bold text-[#b7bac1]">
+                                    {comment.author}
+                                </h3>
+                                <p className="text-[#b7bac1] text-sm">
+                                    {new Date(comment.date).toLocaleString()}
+                                </p>
+                            </div>
+                            <p className="">{comment.content}</p>
                         </div>
-                        <p className="">{comment.content}</p>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
         </Container>
     );
 };
