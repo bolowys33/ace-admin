@@ -47,7 +47,17 @@ const Login = () => {
                     username: "",
                     password: "",
                 });
-                setTimeout(() => router.back(), 4000);
+                setTimeout(() => {
+                    const shouldRedirectToHome =
+                        document.referrer.includes("/forgot-password") ||
+                        !document.referrer;
+
+                    if (shouldRedirectToHome) {
+                        router.push("/");
+                    } else {
+                        router.back();
+                    }
+                }, 4000);
             } else {
                 setError(response.data.message);
             }
@@ -103,7 +113,9 @@ const Login = () => {
                             required
                             onChange={handleChange}
                         />
-                        <Link href={"/forgot-password"} className="text-[red]">Forgot Password?</Link>
+                        <Link href={"/forgot-password"} className="text-[red]">
+                            Forgot Password?
+                        </Link>
                         <button
                             type="submit"
                             disabled={isloading}
