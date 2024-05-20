@@ -186,9 +186,9 @@ const Posts = () => {
                                         {post.date_created.split("T")[0]}
                                     </td>
                                     <td className="p-2">
-                                        {post.comments.length === 0
+                                        {post.comments?.length === 0
                                             ? "No"
-                                            : post.comments.length}{""}{post.comments.length < 2 ? "comment" : "comments"}
+                                            : post.comments?.length}{""}{post.comments?.length < 2 ? "comment" : "comments"}
                                     </td>
                                     <td className="p-2 space-x-2">
                                         <Link
