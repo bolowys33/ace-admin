@@ -69,7 +69,7 @@ const SinglePost = ({ url }: { url: string }) => {
                             {ReactHtmlParser(post?.content as string)}
                         </div>
                     </Container>
-                        <Comments />
+                    <Comments comments={post?.comments} />
                 </div>
             )}
         </div>

@@ -6,6 +6,7 @@ export interface Post {
     title: string;
     content: string;
     post_url: string;
+    comments: string[];
     date_created: string;
 }
 
