@@ -19,7 +19,7 @@ export async function GET(
         const post = await Post.findOne({ post_url: url })
             .select("-__v")
             .populate({ path: "author", select: "firstname lastname" })
-            .populate({ path: "comments", select: "-__v" });
+            .populate({ path: "comments", select: "author body date_created" });
         if (!post) {
             return NextResponse.json(
                 { success: false, message: "Post not found" },
