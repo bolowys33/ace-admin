@@ -12,11 +12,6 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated && !isLoading) {
-        router.push("/login");
-        return null;
-    }
-
     const { id } = params;
 
     const { attorney, isFetching, error } = useSingleAttorney(id);
@@ -43,6 +38,11 @@ const EditAttorney = ({ params }: { params: { id: string } }) => {
     }, [attorney]);
 
     const [image, setImage] = useState<File | null>(null);
+
+    if (!isAuthenticated && !isLoading) {
+        router.push("/login");
+        return null;
+    }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
