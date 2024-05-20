@@ -12,7 +12,7 @@ const Login = () => {
     const router = useRouter();
     const { isAuthenticated } = useAuthorization();
 
-    if (isAuthenticated) router.push("/dashboard");
+    if (isAuthenticated) router.push("/");
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
