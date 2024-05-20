@@ -11,14 +11,14 @@ const EditProfile = () => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
+    const { admin, error, isFetching } = useAdmin();
+
+    const [isProfile, setIsProfile] = useState<boolean>(true);
+
     if (!isAuthenticated && !isLoading) {
         router.push("/login");
         return null;
     }
-
-    const { admin, error, isFetching } = useAdmin();
-
-    const [isProfile, setIsProfile] = useState<boolean>(true);
 
     const toggleForm = () => {
         setIsProfile(!isProfile);
