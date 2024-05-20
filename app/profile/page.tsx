@@ -10,12 +10,12 @@ const ProfilePage = () => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
+    const { admin, error, isFetching } = useAdmin();
+
     if (!isAuthenticated && !isLoading) {
         router.push("/login");
         return null;
     }
-
-    const { admin, error, isFetching } = useAdmin();
 
     if (isFetching) {
         return (
