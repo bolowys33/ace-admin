@@ -1,4 +1,4 @@
-import { Comment } from "@/hooks/usePosts";
+
 import { Container } from "@mui/material";
 import { FC } from "react";
 
