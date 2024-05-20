@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className="mt-3 space-y-4 pr-8">
+            <div className="mt-20 space-y-4 pr-8">
                 <div>
                     <div
                         className={`hover:bg-[#2e374a] p-3 rounded-md ${

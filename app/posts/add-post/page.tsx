@@ -14,11 +14,6 @@ const AddPost = () => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated && !isLoading) {
-        router.push("/login");
-        return null;
-    }
-
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
@@ -27,6 +22,11 @@ const AddPost = () => {
         title: "",
         content: "",
     });
+
+    if (!isAuthenticated && !isLoading) {
+        router.push("/login");
+        return null;
+    }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });

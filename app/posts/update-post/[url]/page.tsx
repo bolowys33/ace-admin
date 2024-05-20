@@ -15,27 +15,31 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
 
-    if (!isAuthenticated && !isLoading) {
-        router.push("/login");
-        return null;
-    }
+    
 
     const { url } = params;
     const { post, error, isFetching } = useSinglePost(url);
-
+    
     const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
-
+    
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-
+    
     useEffect(() => {
         if (post) {
             setTitle(post.title);
             setContent(post.content);
         }
     }, [post]);
+    
+    const editor = useRef(null);
+    
+    if (!isAuthenticated && !isLoading) {
+        router.push("/login");
+        return null;
+    }
 
     const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
@@ -47,7 +51,6 @@ const UpdatePost = ({ params }: { params: { url: string } }) => {
 
     const cleanContent = DOMPurify.sanitize(content);
 
-    const editor = useRef(null);
     const config = {
         height: "350px",
     };

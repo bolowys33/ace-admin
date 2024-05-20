@@ -80,7 +80,7 @@ const ForgotPassword = () => {
                             required
                             onChange={handleChange}
                         />
-                        <Link href={"/forgot-password"} className="text-[red]">Know your password? Sign-in instead</Link>
+                        <Link href={"/login"} className="text-[red] mt-5">Know your password? Sign-in instead</Link>
                         <button
                             type="submit"
                             disabled={isloading}
