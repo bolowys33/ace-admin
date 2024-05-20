@@ -17,11 +17,13 @@ const AddPost = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
-
+    
     const [inputData, setInputData] = useState({
         title: "",
         content: "",
     });
+    
+    const editor = useRef(null);
 
     if (!isAuthenticated && !isLoading) {
         router.push("/login");
@@ -34,7 +36,6 @@ const AddPost = () => {
 
     const cleanContent = DOMPurify.sanitize(inputData.content);
 
-    const editor = useRef(null);
     const config = {
         height: "350px",
     };
