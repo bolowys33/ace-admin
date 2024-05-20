@@ -3,20 +3,20 @@ import { Container } from "@mui/material";
 import { FC } from "react";
 
 interface CommentProps {
-    comments: Comment[];
+    comments?: Comment[];
 }
 
 const Comments: FC<CommentProps> = ({ comments }) => {
     return (
         <Container maxWidth="sm" className="mt-14">
             <h2 className="text-xl font-bold mb-4 text-center">Comments</h2>
-            {comments.length === 0 ? (
+            {comments?.length === 0 ? (
                 <div className="grid place-items-center text-red-500 h-[250px]">
                     No comment found
                 </div>
             ) : (
                 <div className="space-y-4">
-                    {comments.map((comment) => (
+                    {comments?.map((comment) => (
                         <div
                             key={comment._id}
                             className="bg-[#2e374a] p-4 rounded-md">
