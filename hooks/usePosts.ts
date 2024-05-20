@@ -1,19 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { useState, useEffect } from "react";
 
-export interface Comment {
-    _id: string;
-    author: string;
-    body: string;
-    date_created: string;
-}
-
 export interface Post {
     _id: string;
     title: string;
     content: string;
     post_url: string;
-    comments: Comment[];
+    comments: string[];
     date_created: string;
 }
 
