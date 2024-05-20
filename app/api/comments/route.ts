@@ -8,7 +8,9 @@ export async function GET(): Promise<Response> {
 
         const comments = await Comment.find()
             .select("-__v")
-            .populate({ path: "post", select: "title" });
+            .populate({ path: "post", select: "title" })
+            .sort({ date_created: -1 })
+            .limit(8);
 
         if (comments.length === 0) {
             return NextResponse.json(
