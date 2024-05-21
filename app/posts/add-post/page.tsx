@@ -4,7 +4,7 @@ import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
 import { ChangeEvent, useRef, useState } from "react";
-import "./jodit-custom.css"; // Import your custom CSS file
+import "./jodit-custom.css";
 import DOMPurify from "dompurify";
 import axios from "axios";
 import useAuthorization from "@/hooks/useAuth";
@@ -17,12 +17,12 @@ const AddPost = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [isloading, setIsLoading] = useState(false);
-    
+
     const [inputData, setInputData] = useState({
         title: "",
         content: "",
     });
-    
+
     const editor = useRef(null);
 
     if (!isAuthenticated && !isLoading) {
@@ -51,7 +51,13 @@ const AddPost = () => {
         formData.append("content", cleanContent);
 
         try {
-            const token = localStorage.getItem("token");
+            // Check if the browser environment is available
+            const isBrowser = typeof window !== "undefined";
+
+            let token;
+            if (isBrowser) {
+                token = localStorage.getItem("token");
+            }
 
             const response = await axios.post("/api/posts", formData, {
                 headers: {

@@ -9,8 +9,9 @@ import { useRouter } from "next/navigation";
 const ProfilePage = () => {
     const { isAuthenticated, isLoading } = useAuthorization();
     const router = useRouter();
-
     const { admin, error, isFetching } = useAdmin();
+
+    const isBrowser = typeof window !== "undefined";
 
     if (!isAuthenticated && !isLoading) {
         router.push("/login");
@@ -55,7 +56,7 @@ const ProfilePage = () => {
             <h2 className="text-center font-bold text-3xl mt-5">My Profile</h2>
             <Container maxWidth="sm" className="bg-[#2e374a] rounded-md mt-8">
                 <div className="flex flex-col items-center space-y-4 mt-7 font-bold">
-                    {admin && (
+                    {isBrowser && admin && (
                         <>
                             <div className="p-5 space-x-14">
                                 <span>Username: </span>
