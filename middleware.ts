@@ -6,7 +6,7 @@ import { JWSInvalid, JWTClaimValidationFailed, JWTExpired } from "jose/errors";
 // CORS headers
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*", // Update with your allowed origins or use '*' to allow all
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
