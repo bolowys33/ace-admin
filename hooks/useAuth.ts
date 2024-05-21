@@ -18,6 +18,10 @@ const useAuthorization = () => {
 
     useEffect(() => {
         const validateToken = async () => {
+            if (typeof window === "undefined") {
+                return;
+            }
+
             const token = localStorage.getItem("token");
 
             if (!token) {
