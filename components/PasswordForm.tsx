@@ -26,7 +26,13 @@ const PasswordForm = () => {
         setError("");
         setSuccess(false);
 
-        const token = localStorage.getItem("token");
+        // Check if the browser environment is available
+        const isBrowser = typeof window !== "undefined";
+
+        let token;
+        if (isBrowser) {
+            token = localStorage.getItem("token");
+        }
 
         const formData = new FormData();
         formData.append("currentPassword", inputData.currentPassword);
