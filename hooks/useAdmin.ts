@@ -16,8 +16,6 @@ interface AdminResponse {
 }
 
 const useAdmin = () => {
-    const token = localStorage.getItem("token");
-
     const [admin, setAdmin] = useState<Admin | null>(null);
     const [isFetching, setIsFetching] = useState(true);
     const [error, setError] = useState<string | null>(null);
