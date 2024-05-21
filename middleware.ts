@@ -6,36 +6,40 @@ import { JWSInvalid, JWTClaimValidationFailed, JWTExpired } from "jose/errors";
 // CORS headers
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*", // Update with your allowed origins or use '*' to allow all
-    "Access-Control-Allow-Methods": "GET, POST",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": "true",
 };
 
 export async function middleware(request: NextRequest) {
-    // Set CORS headers
-    const response = new NextResponse(null, {
-        headers: corsHeaders,
+    // Handle CORS preflight requests
+    if (request.method === "OPTIONS") {
+        const res = NextResponse.next();
+        Object.entries(corsHeaders).forEach(([key, value]) => {
+            res.headers.append(key, value);
+        });
+        return res;
+    }
+
+    // Add CORS headers to all responses
+    const res = NextResponse.next();
+    Object.entries(corsHeaders).forEach(([key, value]) => {
+        res.headers.append(key, value);
     });
 
-    // Ensure CORS preflight requests are handled
-    if (request.method === "OPTIONS") {
-        return response;
-    }
-
+    // Skip authentication for specific routes and methods
+    const { pathname } = request.nextUrl;
     if (
-        (request.nextUrl.pathname === "/api/attorneys" &&
-            request.method === "GET") ||
-        (request.nextUrl.pathname === "/api/posts" &&
-            request.method === "GET") ||
-        (request.nextUrl.pathname.startsWith("/api/posts/") &&
-            request.method === "GET") ||
-        (request.nextUrl.pathname === "/api/admin" &&
-            request.method === "POST") ||
-        (request.nextUrl.pathname.startsWith("/api/attorneys/") &&
-            request.method === "GET")
+        (pathname === "/api/attorneys" && request.method === "GET") ||
+        (pathname === "/api/posts" && request.method === "GET") ||
+        (pathname.startsWith("/api/posts/") && request.method === "GET") ||
+        (pathname === "/api/admin" && request.method === "POST") ||
+        (pathname.startsWith("/api/attorneys/") && request.method === "GET")
     ) {
-        return NextResponse.next();
+        return res;
     }
 
+    // JWT authentication
     try {
         const token = request.headers.get("authorization");
         if (!token) {
@@ -48,34 +52,28 @@ export async function middleware(request: NextRequest) {
             );
         }
 
-        const decoded = await jwtVerify(
+        const { payload } = await jwtVerify(
             token,
             new TextEncoder().encode(process.env.JWT_SECRET as string)
         );
-        const responseWithHeaders = NextResponse.next();
-        responseWithHeaders.headers.set(
-            "X-Admin-ID",
-            decoded.payload.id as string
-        );
-        return responseWithHeaders;
+        res.headers.set("X-Admin-ID", payload.id as string);
+        return res;
     } catch (error) {
         if (error instanceof JWTExpired) {
             return NextResponse.json(
-                { success: false, message: "jwt expired" },
+                { success: false, message: "JWT expired" },
                 { status: 401 }
             );
-        } else if (error instanceof JWSInvalid) {
-            return NextResponse.json(
-                { success: false, message: "Invalid token" },
-                { status: 401 }
-            );
-        } else if (error instanceof JWTClaimValidationFailed) {
+        } else if (
+            error instanceof JWSInvalid ||
+            error instanceof JWTClaimValidationFailed
+        ) {
             return NextResponse.json(
                 { success: false, message: "Invalid token" },
                 { status: 401 }
             );
         } else {
-            console.log(error);
+            console.error(error);
             return NextResponse.json(
                 { success: false, message: "An unknown error occurred" },
                 { status: 500 }
