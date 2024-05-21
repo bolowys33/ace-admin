@@ -3,7 +3,7 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import JoditEditor from "jodit-react";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./jodit-custom.css";
 import DOMPurify from "dompurify";
 import axios from "axios";
@@ -25,10 +25,11 @@ const AddPost = () => {
 
     const editor = useRef(null);
 
-    if (!isAuthenticated && !isLoading) {
-        router.push("/login");
-        return null;
-    }
+    useEffect(() => {
+        if (!isAuthenticated && !isLoading) {
+            router.push("/login");
+        }
+    }, [isAuthenticated, isLoading, router]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -52,13 +53,13 @@ const AddPost = () => {
 
         try {
             // Check if the browser environment is available
-            const isBrowser = typeof window !== "undefined";
-
-            let token;
-            if (isBrowser) {
-                token = localStorage.getItem("token");
+            const token =
+                typeof window !== "undefined"
+                    ? localStorage.getItem("token")
+                    : null;
+            if (!token) {
+                throw new Error("Token not found");
             }
-
             const response = await axios.post("/api/posts", formData, {
                 headers: {
                     Authorization: token,
