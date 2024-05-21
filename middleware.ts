@@ -3,7 +3,24 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 import { JWSInvalid, JWTClaimValidationFailed, JWTExpired } from "jose/errors";
 
+// CORS headers
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "*", // Update with your allowed origins or use '*' to allow all
+    "Access-Control-Allow-Methods": "GET, POST",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 export async function middleware(request: NextRequest) {
+    // Set CORS headers
+    const response = new NextResponse(null, {
+        headers: corsHeaders,
+    });
+
+    // Ensure CORS preflight requests are handled
+    if (request.method === "OPTIONS") {
+        return response;
+    }
+
     if (
         (request.nextUrl.pathname === "/api/attorneys" &&
             request.method === "GET") ||
@@ -18,6 +35,7 @@ export async function middleware(request: NextRequest) {
     ) {
         return NextResponse.next();
     }
+
     try {
         const token = request.headers.get("authorization");
         if (!token) {
@@ -34,10 +52,12 @@ export async function middleware(request: NextRequest) {
             token,
             new TextEncoder().encode(process.env.JWT_SECRET as string)
         );
-        const response = NextResponse.next();
-        response.headers.set("X-Admin-ID", decoded.payload.id as string);
-
-        return response;
+        const responseWithHeaders = NextResponse.next();
+        responseWithHeaders.headers.set(
+            "X-Admin-ID",
+            decoded.payload.id as string
+        );
+        return responseWithHeaders;
     } catch (error) {
         if (error instanceof JWTExpired) {
             return NextResponse.json(
