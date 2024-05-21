@@ -27,6 +27,12 @@ const useAdmin = () => {
         setError(null);
 
         try {
+            if (typeof window === "undefined") {
+                setIsFetching(false);
+                return;
+            }
+
+            const token = localStorage.getItem("token");
             const { data }: AxiosResponse<AdminResponse> = await axios.get(
                 "/api/admin",
                 {
