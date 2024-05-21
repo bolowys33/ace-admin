@@ -3,9 +3,8 @@
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./jodit-custom.css";
-import DOMPurify from "dompurify";
 import axios from "axios";
 import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
@@ -36,7 +35,15 @@ const AddPost = () => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
     };
 
-    const cleanContent = DOMPurify.sanitize(inputData.content);
+    const sanitizeContent = (content: string) => {
+        if (typeof window !== "undefined") {
+            const DOMPurify = require('dompurify')(window);
+            return DOMPurify.sanitize(content);
+        }
+        return content;
+    };
+
+    const cleanContent = sanitizeContent(inputData.content);
 
     const config = {
         height: "350px",
