@@ -19,6 +19,7 @@ const useAuthorization = () => {
     useEffect(() => {
         const validateToken = async () => {
             if (typeof window === "undefined") {
+                setIsLoading(false);
                 return;
             }
 

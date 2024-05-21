@@ -2,13 +2,15 @@
 
 import InputField from "@/components/InputField";
 import { Alert, Box, Container } from "@mui/material";
-import JoditEditor from "jodit-react";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { ChangeEvent, useRef, useState } from "react";
 import "./jodit-custom.css";
 import DOMPurify from "dompurify";
 import axios from "axios";
 import useAuthorization from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AddPost = () => {
     const { isAuthenticated, isLoading } = useAuthorization();
@@ -25,11 +27,10 @@ const AddPost = () => {
 
     const editor = useRef(null);
 
-    useEffect(() => {
-        if (!isAuthenticated && !isLoading) {
-            router.push("/login");
-        }
-    }, [isAuthenticated, isLoading, router]);
+    if (!isAuthenticated && !isLoading) {
+        router.push("/login");
+        return null;
+    }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -52,17 +53,18 @@ const AddPost = () => {
         formData.append("content", cleanContent);
 
         try {
-            // Check if the browser environment is available
-            const token =
-                typeof window !== "undefined"
-                    ? localStorage.getItem("token")
-                    : null;
+            if (typeof window === "undefined") {
+                return;
+            }
+
+            const token = localStorage.getItem("token");
             if (!token) {
                 throw new Error("Token not found");
             }
+
             const response = await axios.post("/api/posts", formData, {
                 headers: {
-                    Authorization: token,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -79,10 +81,8 @@ const AddPost = () => {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 setError(
-                    error.response?.data.message ||
-                        "Error creating post, try again"
+                    error.response?.data.message || "Error creating post, try again"
                 );
-                setTimeout(() => setError(""), 10000);
             } else {
                 setError("An unknown error occurred");
             }
@@ -139,7 +139,7 @@ const AddPost = () => {
                         <button
                             type="submit"
                             disabled={isloading}
-                            className={`py-2 px-5  text-white font-medium rounded-md ${
+                            className={`py-2 px-5 text-white font-medium rounded-md ${
                                 isloading
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-[#5d57c9] hover:bg-[#39357e]"
