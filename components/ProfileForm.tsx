@@ -28,8 +28,6 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
         setError("");
         setSuccess(false);
 
-        const token = localStorage.getItem("token");
-
         const formData = new FormData();
         formData.append("username", inputData.username);
         formData.append("email", inputData.email);
@@ -37,6 +35,14 @@ const ProfileForm = ({ admin }: { admin: Admin }) => {
         formData.append("lastname", inputData.lastname);
 
         try {
+             // Check if the browser environment is available
+             const isBrowser = typeof window !== "undefined";
+
+             let token;
+             if (isBrowser) {
+                 token = localStorage.getItem("token");
+             }
+
             const response = await axios.put("/api/admin", formData, {
                 headers: {
                     Authorization: token,
