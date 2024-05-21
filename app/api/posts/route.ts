@@ -17,7 +17,8 @@ export async function GET(req: Request): Promise<Response> {
         const posts = await Post.find({})
             .select("-__v")
             .skip(skip)
-            .limit(limit + 1); // Get one more post than the limit to check if there are more posts
+            .sort({ date_created: -1 })
+            .limit(limit + 1) // Get one more post than the limit to check if there are more posts
 
         const hasMore = posts.length > limit; // Check if there are more posts
 
