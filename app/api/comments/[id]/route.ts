@@ -10,6 +10,12 @@ export async function GET(
         await connectDB();
 
         const { id } = params;
+        if (!id)
+            return NextResponse.json(
+                { success: false, message: "Please provide comment ID" },
+                { status: 400 }
+            );
+
         const comment = await Comment.findById(id).select("-__v");
         if (!comment) {
             return NextResponse.json(
@@ -88,6 +94,8 @@ export async function PATCH(
     { params }: { params: { id: string } }
 ) {
     try {
+        await connectDB();
+
         const { id } = params;
         if (!id)
             return NextResponse.json(
