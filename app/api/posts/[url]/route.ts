@@ -22,6 +22,7 @@ export async function GET(
             .populate({
                 path: "comments",
                 select: "author body date_created _id",
+                match: { moderated: true },
             });
         if (!post) {
             return NextResponse.json(
