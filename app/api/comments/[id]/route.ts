@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     req: Request,
-    { params }: { params: { commentId: string } }
+    { params }: { params: { id: string } }
 ): Promise<Response> {
     try {
         await connectDB();
 
-        const { commentId } = params;
-        const comment = await Comment.findById(commentId).select("-__v");
+        const { id } = params;
+        const comment = await Comment.findById(id).select("-__v");
         if (!comment) {
             return NextResponse.json(
                 { success: false, message: "Comment not found" },
