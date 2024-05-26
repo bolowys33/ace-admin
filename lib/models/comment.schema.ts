@@ -13,6 +13,10 @@ export const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Post",
     },
+    moderated: {
+        type: Boolean,
+        default: false,
+    },
     date_created: {
         type: Date,
         default: Date.now(),
