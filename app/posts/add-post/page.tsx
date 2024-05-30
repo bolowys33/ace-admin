@@ -71,7 +71,7 @@ const AddPost = () => {
 
             const response = await axios.post("/api/posts", formData, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: token,
                 },
             });
 
