@@ -9,6 +9,10 @@ export const commentSchema = new Schema({
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+        required: true
+    },
     post: {
         type: Schema.Types.ObjectId,
         ref: "Post",
