@@ -42,7 +42,7 @@ export async function GET(
             .select("title post_url");
 
         const data = {
-            ...currentPost,
+            currentPost: currentPost,
             previousPost: previousPost
                 ? {
                       title: previousPost.title,
