@@ -41,7 +41,12 @@ export async function GET(
             .sort({ _id: 1 })
             .select("title post_url");
 
-        return NextResponse.json({ success: true, data: post });
+        const data = {
+            ...post,
+            previousPost: previousPost ? previousPost : null,
+            nextPost: nextPost ? nextPost : null,
+        };
+        return NextResponse.json({ success: true, data });
     } catch (error) {
         if (error instanceof Error) {
             return NextResponse.json(
