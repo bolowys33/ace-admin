@@ -34,7 +34,8 @@ export async function middleware(request: NextRequest) {
         (pathname === "/api/posts" && request.method === "GET") ||
         (pathname.startsWith("/api/posts/") && request.method === "GET") ||
         (pathname === "/api/admin" && request.method === "POST") ||
-        (pathname.startsWith("/api/attorneys/") && request.method === "GET")
+        (pathname.startsWith("/api/attorneys/") && request.method === "GET") ||
+        (pathname === "/api/comments" && request.method === "POST")
     ) {
         return res;
     }
@@ -89,5 +90,6 @@ export const config = {
         "/api/admin",
         "/api/posts",
         "/api/posts/:path*",
+        "api/comments",
     ],
 };
