@@ -42,7 +42,7 @@ export async function GET(
             .select("title post_url");
 
         const data = {
-            ...post,
+            ...post._doc,
             previousPost: previousPost ? previousPost : null,
             nextPost: nextPost ? nextPost : null,
         };
