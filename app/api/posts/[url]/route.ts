@@ -16,7 +16,7 @@ export async function GET(
                 { status: 400 }
             );
 
-        const post = await Post.findOne({ post_url: url })
+        const currentPost = await Post.findOne({ post_url: url })
             .select("-__v")
             .populate({ path: "author", select: "firstname lastname" })
             .populate({
@@ -24,14 +24,40 @@ export async function GET(
                 select: "author body date_created _id",
                 match: { moderated: true },
             });
-        if (!post) {
+        if (!currentPost) {
             return NextResponse.json(
                 { success: false, message: "Post not found" },
                 { status: 404 }
             );
         }
 
-        return NextResponse.json({ success: true, data: post });
+        const previousPost = await Post.findOne({
+            _id: { $lt: currentPost._id },
+        })
+            .sort({ _id: -1 })
+            .select("title post_url");
+
+        const nextPost = await Post.findOne({ _id: { $gt: currentPost._id } })
+            .sort({ _id: 1 })
+            .select("title post_url");
+
+        const data = {
+            ...currentPost,
+            previousPost: previousPost
+                ? {
+                      title: previousPost.title,
+                      url: previousPost.post_url,
+                  }
+                : null,
+            nextPost: nextPost
+                ? {
+                      title: nextPost.title,
+                      url: nextPost.post_url,
+                  }
+                : null,
+        };
+
+        return NextResponse.json({ success: true, data });
     } catch (error) {
         if (error instanceof Error) {
             return NextResponse.json(
