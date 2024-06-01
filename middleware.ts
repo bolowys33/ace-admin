@@ -90,6 +90,6 @@ export const config = {
         "/api/admin",
         "/api/posts",
         "/api/posts/:path*",
-        "api/comments",
+        "/api/comments",
     ],
 };
