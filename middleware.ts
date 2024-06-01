@@ -35,7 +35,8 @@ export async function middleware(request: NextRequest) {
         (pathname.startsWith("/api/posts/") && request.method === "GET") ||
         (pathname === "/api/admin" && request.method === "POST") ||
         (pathname.startsWith("/api/attorneys/") && request.method === "GET") ||
-        (pathname === "/api/comments" && request.method === "POST")
+        (pathname === "/api/comments" &&
+            (request.method === "POST" || request.method === "GET"))
     ) {
         return res;
     }
